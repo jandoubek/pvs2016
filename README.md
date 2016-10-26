@@ -17,7 +17,6 @@ PVS 2016 test repo
 * Oddělení podpory informačních systémů - univerzita Pardubice
 
 ## František Navrkal
-* Z Karibiku
-* Auto - F. A. N. 
+* [pirátský životopis](https://pirati.cz/lide/frantisek_navrkal)
 
 ## ? Jirka
