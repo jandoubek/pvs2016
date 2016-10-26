@@ -7,9 +7,8 @@ PVS 2016 test repo
 * Asi nejaky vysoky politik
 
 ## Lukáš Nevařil
-* Sportsmen - runner - dlouhe trate
+* long distance runner
 * Moravske Budejovice
-* se rozplakal http://kolinsky.denik.cz/galerie/prave-jsme-se-narodili2006.html?mm=5340493
 
 ## Martin Šindelář
 * SK Sigma Olomouc - obrance
