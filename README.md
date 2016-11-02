@@ -21,5 +21,6 @@ Build [![Build Status](https://travis-ci.org/jandoubek/pvs2016.png)](https://tra
 
 ## František Navrkal
 * [pirátský životopis](https://pirati.cz/lide/frantisek_navrkal)
+* Posranej Gradle
 
 ## ? Jirka
