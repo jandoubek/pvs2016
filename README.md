@@ -1,7 +1,8 @@
 # pvs2016
 PVS 2016 test repo
 
-Build [![Build Status](https://travis-ci.org/jandoubek/pvs2016.png)](https://travis-ci.org/jandoubek/pvs2016)
+[![Build Status](https://travis-ci.org/jandoubek/pvs2016.png)](https://travis-ci.org/jandoubek/pvs2016)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/08919ca416254f308
 
 # Team
 
