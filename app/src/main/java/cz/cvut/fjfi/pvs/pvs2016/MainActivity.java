@@ -64,4 +64,8 @@ public class MainActivity extends AppCompatActivity {
 		arrayAdapter.notifyDataSetChanged();
 		editText.setText("");
 	}
+
+	public void showMagicNote(View view) {
+		Toast.makeText(this, "Magic note", Toast.LENGTH_SHORT).show();
+	}
 }
