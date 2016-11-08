@@ -68,4 +68,8 @@ public class MainActivity extends AppCompatActivity {
 	public void showMagicNote(View view) {
 		Toast.makeText(this, "Magic note", Toast.LENGTH_SHORT).show();
 	}
+
+	public void showJDsNote(View view) {
+		Toast.makeText(this, "Who is John Galt", Toast.LENGTH_SHORT).show();
+	}
 }
