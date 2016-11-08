@@ -1,9 +1,5 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,10 +14,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-	List<String> listItems = new ArrayList<>();
-	ArrayAdapter arrayAdapter = null;
+	private List<String> listItems = new ArrayList<>();
+	private ArrayAdapter arrayAdapter = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
