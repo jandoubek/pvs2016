@@ -32,7 +32,14 @@
         android:id="@+id/JDNoteButton" android:onClick="showJDsNote"/>
 
 
-    <ListView android:id="@+id/main_activity_list"
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/btn_franta"
+		android:id="@+id/button2"
+		android:onClick="showFNjsNote" />
+
+	<ListView android:id="@+id/main_activity_list"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"/>
 

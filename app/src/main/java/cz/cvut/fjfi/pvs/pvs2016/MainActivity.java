@@ -71,4 +71,8 @@ public class MainActivity extends AppCompatActivity {
 	public void showJDsNote(View view) {
 		Toast.makeText(this, "Who is John Galt", Toast.LENGTH_SHORT).show();
 	}
+
+	public void showFNjsNote(View view) {
+		Toast.makeText(this, "Make America Great Again!", Toast.LENGTH_SHORT).show();
+	}
 }
