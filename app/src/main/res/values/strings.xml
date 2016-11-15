@@ -5,7 +5,8 @@
     <string name="btn_franta">Franta</string>
     <string name="main_activity_edit_text_hint">write something</string>
 
-	<!--Toolbar-->
-	<string name="toolbar_settings">Settings</string>
-	<string name="toolbar_help">Help</string>
+    <!--Toolbar-->
+    <string name="toolbar_settings">Settings</string>
+    <string name="toolbar_help">Help</string>
+    <string name="title_activity_table">Table</string>
 </resources>
