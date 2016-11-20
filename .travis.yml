@@ -8,6 +8,7 @@ android:
     - android-25
     - extra
     - add-on
+    - sys-img-armeabi-v7a-android-25
 jdk:
   - oraclejdk8
 # Emulator Management: Create, Start and Wait
