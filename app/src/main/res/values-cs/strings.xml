@@ -5,4 +5,6 @@
 	<string name="btn_martin">Martin</string>
 	<string name="btn_honza">Honza</string>
 	<string name="btn_franta">Franta</string>
+	<string name="do_magic">Abraka dabra</string>
+	<string name="main_activity_edit_text_hint">Napis neco</string>
 </resources>
