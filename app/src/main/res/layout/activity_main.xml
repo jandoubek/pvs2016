@@ -8,39 +8,10 @@
 
 	<include layout="@layout/action_toolbar"/>
 
-	<EditText android:id="@+id/main_activity_edit_text"
-			  android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"
-			  android:hint="@string/main_activity_edit_text_hint"/>
-
 	<Button android:id="@+id/magicButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/do_magic"
-			android:onClick="addTextToList"/>
-
-	<Button
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/btn_martin"
-			android:id="@+id/magicNoteButton" android:onClick="showMagicNote"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_honza"
-        android:id="@+id/JDNoteButton" android:onClick="showJDsNote"/>
-
-
-	<Button
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/btn_franta"
-		android:id="@+id/button2"
-		android:onClick="showFNjsNote" />
-
-	<ListView android:id="@+id/main_activity_list"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"/>
+			android:text="@string/take_photo"
+			android:onClick="takePhoto"/>
 
 </LinearLayout>
