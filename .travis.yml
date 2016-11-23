@@ -2,9 +2,36 @@ language: android
 android:
   components:
     - tools
-    - tools
     - platform-tools
+    - tools
     - build-tools-25.0.0
-    - android-23
+    - android-25
+    - extra
+    - add-on
+    - sys-img-armeabi-v7a-android-25
+    - sys-img-x86-addon-google_apis-google-25
 jdk:
   - oraclejdk8
+
+# Emulator Management: Create, Start and Wait
+#before_script:
+#    - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
+#    - emulator -avd test -no-skin -no-audio -no-window &
+#    - android-wait-for-emulator
+#    - adb shell input keyevent 82 &
+
+script:
+#  - android list target
+#  - ./gradlew build connectedAndroidTest
+  - ./gradlew build
+
+env:
+  - CODACY_PROJECT_TOKEN=957f7df5b20343388d04a228ab1e45fe
+
+before_install:
+  - curl -sL https://github.com/jpm4j/jpm4j.installers/raw/master/dist/biz.aQute.jpm.run.jar >jpm4j.jar
+  - java -jar jpm4j.jar -u init
+  - ~/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
+
+after_success:
+  - ~/jpm/bin/codacy-coverage-reporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml

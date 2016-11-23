@@ -2,7 +2,6 @@
     <string name="app_name">Zápisky</string>
 	<string name="toolbar_settings">Nastavení</string>
 	<string name="toolbar_help">Nápověda</string>
-	<string name="btn_martin">Martin</string>
-	<string name="btn_honza">Honza</string>
-	<string name="btn_franta">Franta</string>
+	<string name="title_activity_table">Tabulka</string>
+	<string name="take_photo">Vyfoť</string>
 </resources>
