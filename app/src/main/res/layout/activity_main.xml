@@ -20,5 +20,4 @@
 			android:onClick="onShowTable"
 			android:text="Table test" />
 
-
 </LinearLayout>
