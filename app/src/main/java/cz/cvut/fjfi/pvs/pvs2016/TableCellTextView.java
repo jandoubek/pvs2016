@@ -4,18 +4,14 @@ import android.content.Context;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-/**
- * Created by fnj on 15.11.16.
- */
-
 public class TableCellTextView extends TextView {
 
-    private static final TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1f);
+	private static final TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1f);
 
-    public TableCellTextView(Context context) {
-        super(context);
-        setLayoutParams(params);
-        setBackgroundResource(R.drawable.cell_shape);
-        setPadding(16, 0, 0, 0);
-    }
+	public TableCellTextView(Context context) {
+		super(context);
+		setLayoutParams(params);
+		setBackgroundResource(R.drawable.cell_shape);
+		setPadding(16, 0, 0, 0);
+	}
 }

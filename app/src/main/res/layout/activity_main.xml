@@ -3,17 +3,21 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
-	android:orientation="vertical"
-	tools:context=".MainActivity">
+			  tools:context=".MainActivity"
+			  android:orientation="vertical">
 
 	<include layout="@layout/action_toolbar"/>
 
-	<Button
-		android:id="@+id/button"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:onClick="onShowTable"
-		android:text="Table test" />
+	<Button android:id="@+id/magicButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/take_photo"
+			android:onClick="takePhoto"/>
 
+	<Button android:id="@+id/button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:onClick="onShowTable"
+			android:text="Table test" />
 
 </LinearLayout>

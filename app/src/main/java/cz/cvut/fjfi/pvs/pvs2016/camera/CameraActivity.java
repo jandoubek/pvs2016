@@ -1,0 +1,135 @@
+package cz.cvut.fjfi.pvs.pvs2016.camera;
+
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.content.Intent;
+import android.hardware.Camera;
+import android.hardware.Camera.PictureCallback;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import cz.cvut.fjfi.pvs.pvs2016.R;
+import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class CameraActivity extends Activity implements ICaptureDialogListener {
+
+	private final CameraActivity self = this;
+
+	private Camera camera;
+	private CameraPreview cameraPreview;
+
+	private PictureCallback pictureCallback = new PictureCallback() {
+		@Override
+		public void onPictureTaken(byte[] data, Camera camera) {
+			Log.d("CameraActivity", "JPEG picture created.");
+			File pictureFile = FileUtils.getOutputMediaFile(FileUtils.MEDIA_TYPE_IMAGE);
+			if (pictureFile == null) {
+				return;
+			}
+			try {
+				Intent previewIntent = new Intent(self, PreviewActivity.class);
+				previewIntent.putExtra("picturePath", pictureFile.getPath());
+				self.startActivity(previewIntent);
+
+				FileOutputStream fos = new FileOutputStream(pictureFile);
+				fos.write(data);
+				fos.close();
+				camera.startPreview();
+				DialogFragment dialog = new AfterCaptureDialog();
+				dialog.show(getFragmentManager(), "actionDialog");
+			} catch (FileNotFoundException e) {
+				//
+			} catch (IOException e) {
+				//
+			}
+		}
+	};
+
+	@Override
+	protected void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_camera);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		camera = getCameraInstance();
+		cameraPreview = new CameraPreview(this, camera);
+		FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
+		preview.addView(cameraPreview);
+		initializeCaptureButton();
+		ensureHiddenStatusBar();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if (camera != null) {
+			camera.stopPreview();
+			camera.setPreviewCallback(null);
+			cameraPreview.getHolder().removeCallback(cameraPreview);
+			camera.release();
+			camera = null;
+		}
+	}
+
+	private void ensureHiddenStatusBar() {
+		View decorView = getWindow().getDecorView();
+		// Hide the status bar.
+		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+//		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+	}
+
+	private void initializeCaptureButton() {
+		Button captureButton = (Button) findViewById(R.id.buttonCapture);
+		captureButton.setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						camera.takePicture(null, null, pictureCallback);
+					}
+				}
+		);
+	}
+
+	private Camera getCameraInstance() {
+		Camera c = null;
+		try {
+			c = Camera.open(); // attempt to get a Camera instance
+			// get Camera parameters
+			Camera.Parameters params = c.getParameters();
+			// set the focus mode
+			params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+			// set Camera parameters
+			c.setParameters(params);
+		} catch (Exception e) {
+			// Camera is not available (in use or does not exist)
+			// show dialog
+		}
+		return c; // returns null if camera is unavailable
+	}
+
+	@Override
+	public void onContinueClick() {
+		ensureHiddenStatusBar();
+	}
+
+	@Override
+	public void onCancelClick() {
+		ensureHiddenStatusBar();
+	}
+
+	@Override
+	public void onSaveClick() {
+		ensureHiddenStatusBar();
+	}
+}

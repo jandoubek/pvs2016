@@ -8,15 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-	private List<String> listItems = new ArrayList<>();
-	private ArrayAdapter arrayAdapter = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +39,13 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	public void takePhoto(View view) {
+		startActivity(new Intent(this, CameraActivity.class));
+	}
+
 	public void onShowTable(View view) {
 		Intent intent = new Intent(this, TableActivity.class);
 		startActivity(intent);
 	}
+
 }
