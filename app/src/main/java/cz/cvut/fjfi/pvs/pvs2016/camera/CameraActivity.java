@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 
@@ -27,7 +28,7 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 	private Camera camera;
 	private CameraPreview cameraPreview;
 
-	private PictureCallback mPicture = new PictureCallback() {
+	private PictureCallback pictureCallback = new PictureCallback() {
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
 			File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
@@ -38,6 +39,7 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				fos.write(data);
 				fos.close();
+				camera.startPreview();
 				DialogFragment dialog = new AfterCaptureDialog();
 				dialog.show(getFragmentManager(), "actionDialog");
 			} catch (FileNotFoundException e) {
@@ -80,8 +82,8 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 	private void ensureHiddenStatusBar() {
 		View decorView = getWindow().getDecorView();
 		// Hide the status bar.
-		int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-		decorView.setSystemUiVisibility(uiOptions);
+		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+//		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 	}
 
 	private void initializeCaptureButton() {
@@ -90,7 +92,7 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						camera.takePicture(null, null, mPicture);
+						camera.takePicture(null, null, pictureCallback);
 					}
 				}
 		);
@@ -100,6 +102,12 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 		Camera c = null;
 		try {
 			c = Camera.open(); // attempt to get a Camera instance
+			// get Camera parameters
+			Camera.Parameters params = c.getParameters();
+			// set the focus mode
+			params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+			// set Camera parameters
+			c.setParameters(params);
 		} catch (Exception e) {
 			// Camera is not available (in use or does not exist)
 			// show dialog
@@ -146,15 +154,16 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 
 	@Override
 	public void onContinueClick() {
+		ensureHiddenStatusBar();
 	}
 
 	@Override
 	public void onCancelClick() {
-
+		ensureHiddenStatusBar();
 	}
 
 	@Override
 	public void onSaveClick() {
-
+		ensureHiddenStatusBar();
 	}
 }
