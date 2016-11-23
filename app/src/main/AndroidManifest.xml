@@ -35,8 +35,8 @@
 		<activity android:name=".TableActivity"
 				  android:label="@string/title_activity_table"
 				  android:theme="@style/AppTheme">
-        <activity android:name=".camera.PreviewActivity">
 		</activity>
+        <activity android:name=".camera.PreviewActivity"/>
 	</application>
 
 </manifest>
