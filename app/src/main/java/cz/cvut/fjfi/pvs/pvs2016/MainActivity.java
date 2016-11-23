@@ -43,4 +43,9 @@ public class MainActivity extends AppCompatActivity {
 		startActivity(new Intent(this, CameraActivity.class));
 	}
 
+	public void onShowTable(View view) {
+		Intent intent = new Intent(this, TableActivity.class);
+		startActivity(intent);
+	}
+
 }
