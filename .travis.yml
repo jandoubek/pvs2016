@@ -35,3 +35,4 @@ before_install:
 
 after_success:
   - ~/jpm/bin/codacy-coverage-reporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+  - bash <(curl -s https://codecov.io/bash)
