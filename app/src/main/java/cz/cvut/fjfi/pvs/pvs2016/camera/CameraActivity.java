@@ -43,8 +43,6 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 				fos.write(data);
 				fos.close();
 				camera.startPreview();
-				DialogFragment dialog = new AfterCaptureDialog();
-				dialog.show(getFragmentManager(), "actionDialog");
 			} catch (FileNotFoundException e) {
 				//
 			} catch (IOException e) {
@@ -86,7 +84,7 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 		View decorView = getWindow().getDecorView();
 		// Hide the status bar.
 		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-//		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+		//		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 	}
 
 	private void initializeCaptureButton() {

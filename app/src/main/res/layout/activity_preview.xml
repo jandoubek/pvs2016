@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_height="match_parent"
+			  android:layout_width="match_parent"
+			  android:orientation="vertical"
+			  android:weightSum="1">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_gravity="center" android:id="@+id/imagePreview">
-        <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView" android:layout_gravity="center"/>
-    </FrameLayout>
-</FrameLayout>
+	<ImageView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/imageView"
+			android:layout_gravity="center_horizontal"
+			android:layout_weight="0.9" android:focusableInTouchMode="false"/>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_weight="0.1">
+		<Button
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:text="@string/btn_discard"
+				android:id="@+id/btn_discard"
+				android:layout_weight="3" android:onClick="discardButtonClicked"/>
+		<Button
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:text="@string/btn_nextPicture"
+				android:id="@+id/btn_nextPicture"
+				android:layout_weight="3" android:onClick="nextPictureButtonClicked"/>
+		<Button
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:text="@string/btn_sessionComplete"
+				android:id="@+id/btn_sessionComplete"
+				android:layout_weight="3" android:onClick="sessionCompleteButtonClicked"/>
+	</LinearLayout>
+</LinearLayout>
