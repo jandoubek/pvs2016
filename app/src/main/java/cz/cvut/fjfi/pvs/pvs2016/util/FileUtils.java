@@ -1,14 +1,19 @@
 package cz.cvut.fjfi.pvs.pvs2016.util;
 
-import android.os.Environment;
-import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
-
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.os.Environment;
+import android.util.Log;
+import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
+
 public class FileUtils {
 
+	private static final String logIdentifier = "FileUtils";
 	public static final int MEDIA_TYPE_IMAGE = 1;
 
 	/**
@@ -51,5 +56,31 @@ public class FileUtils {
 	public static boolean deleteFile(String picturePath) {
 		File file = new File(picturePath);
 		return file.delete();
+	}
+
+	public static boolean writeToFile(File file, byte[] data) {
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			fos.write(data);
+			fos.flush();
+		} catch (FileNotFoundException e) {
+			Log.w(logIdentifier, "Provided file to write operation was not found");
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			Log.w(logIdentifier, "IO expection occured while writing to file " + file);
+			e.printStackTrace();
+			return false;
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					// close quietly
+				}
+			}
+		}
+		return true;
 	}
 }

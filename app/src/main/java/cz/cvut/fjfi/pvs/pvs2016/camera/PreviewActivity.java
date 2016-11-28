@@ -2,6 +2,8 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 
 import java.io.File;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -27,13 +29,19 @@ public class PreviewActivity extends Activity {
 		this.persistPicturePath();
 		setContentView(R.layout.activity_preview);
 		setUpPicasso();
-		showPicture(this.picturePath);
+		showPictureZoomable(this.picturePath);
 	}
 
 	private void persistPicturePath() {
 		this.picturePath = getIntent().getStringExtra(picturePathPamrameter);
 	}
 
+	private void showPictureZoomable(String path) {
+		SubsamplingScaleImageView imageView = (SubsamplingScaleImageView) findViewById(R.id.imageView);
+		imageView.setImage(ImageSource.uri(path));
+	}
+
+	@Deprecated
 	private void showPicture(String pictureFilePath) {
 		Log.d(LOG_DESC, "Path of picture to preview: " + pictureFilePath);
 
