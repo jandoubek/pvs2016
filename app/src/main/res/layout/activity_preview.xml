@@ -5,12 +5,13 @@
 			  android:orientation="vertical"
 			  android:weightSum="1">
 
-	<ImageView
+	<com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:id="@+id/imageView"
 			android:layout_gravity="center_horizontal"
-			android:layout_weight="0.9" android:focusableInTouchMode="false"/>
+			android:layout_weight="0.9"
+			android:focusableInTouchMode="false"/>
 	<LinearLayout
 			android:orientation="horizontal"
 			android:layout_width="match_parent"

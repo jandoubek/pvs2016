@@ -1,7 +1,8 @@
 package cz.cvut.fjfi.pvs.pvs2016.camera;
 
+import java.io.File;
+
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
@@ -13,11 +14,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class CameraActivity extends Activity implements ICaptureDialogListener {
 
@@ -34,20 +30,11 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 			if (pictureFile == null) {
 				return;
 			}
-			try {
-				Intent previewIntent = new Intent(self, PreviewActivity.class);
-				previewIntent.putExtra("picturePath", pictureFile.getPath());
-				self.startActivity(previewIntent);
-
-				FileOutputStream fos = new FileOutputStream(pictureFile);
-				fos.write(data);
-				fos.close();
-				camera.startPreview();
-			} catch (FileNotFoundException e) {
-				//
-			} catch (IOException e) {
-				//
-			}
+			Intent previewIntent = new Intent(self, PreviewActivity.class);
+			previewIntent.putExtra("picturePath", pictureFile.getPath());
+			self.startActivity(previewIntent);
+			FileUtils.writeToFile(pictureFile, data);
+			camera.startPreview();
 		}
 	};
 
