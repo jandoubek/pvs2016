@@ -2,8 +2,9 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 
 import java.io.IOException;
 
-import android.content.Context;
+import android.app.Activity;
 import android.hardware.Camera;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -11,11 +12,13 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
 	private Camera camera;
 	private SurfaceHolder holder;
+	private Activity activity;
 
-	public CameraPreview(Context context, Camera camera) {
-		super(context);
+	public CameraPreview(Activity activity, Camera camera) {
+		super(activity);
 		this.camera = camera;
 		this.holder = getHolder();
+		this.activity = activity;
 		holder.addCallback(this);
 	}
 
@@ -50,9 +53,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 		// reformatting changes here
 		holder.setFormat(format);
 		holder.setFixedSize(width, height);
-
 		// start preview with new settings
 		try {
+			setCameraDisplayOrientation(activity, 0, camera);
+			Camera.Parameters parameters = camera.getParameters();
+			Camera.Size previewSize = parameters.getSupportedPreviewSizes().get(0);
+			parameters.setPreviewSize(previewSize.width, previewSize.height);
+			parameters.setRotation(90);
+			camera.setParameters(parameters);
 			camera.setPreviewDisplay(holder);
 			camera.startPreview();
 		} catch (IOException e) {
@@ -70,4 +78,30 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 			camera = null;
 		}
 	}
+
+	private void setCameraDisplayOrientation(Activity activity, int cameraId, android.hardware.Camera camera) {
+		android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+		android.hardware.Camera.getCameraInfo(cameraId, info);
+		int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+		int degrees = 0;
+
+		switch (rotation) {
+		case Surface.ROTATION_0:
+			degrees = 0;
+			break;
+		case Surface.ROTATION_90:
+			degrees = 90;
+			break;
+		case Surface.ROTATION_180:
+			degrees = 180;
+			break;
+		case Surface.ROTATION_270:
+			degrees = 270;
+			break;
+		}
+		// only for back-facing camera
+		int result = (info.orientation - degrees + 360) % 360;
+		camera.setDisplayOrientation(result);
+	}
+
 }

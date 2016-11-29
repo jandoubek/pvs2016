@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
-public class CameraActivity extends Activity implements ICaptureDialogListener {
+public class CameraActivity extends Activity {
 
 	private final CameraActivity self = this;
 
@@ -103,18 +103,4 @@ public class CameraActivity extends Activity implements ICaptureDialogListener {
 		return c; // returns null if camera is unavailable
 	}
 
-	@Override
-	public void onContinueClick() {
-		ensureHiddenStatusBar();
-	}
-
-	@Override
-	public void onCancelClick() {
-		ensureHiddenStatusBar();
-	}
-
-	@Override
-	public void onSaveClick() {
-		ensureHiddenStatusBar();
-	}
 }

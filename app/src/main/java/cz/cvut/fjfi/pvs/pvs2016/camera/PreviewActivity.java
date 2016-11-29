@@ -8,6 +8,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,7 +82,7 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void sessionCompleteButtonClicked(View view) {
-		//		todo go to edit page, create global tags, etc
+		startActivity(new Intent(this, CompleteSessionActivity.class));
 		this.finish();
 	}
 
