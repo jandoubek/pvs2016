@@ -7,8 +7,6 @@ PVS 2016 projektova repozitar
 
 Fotozapisnikova aplikace pro ukladani psanych poznamek do mobilniho telefonu. Jednoducha moznost exportu a sdileni.
 
-Importování formátovacích pravidel: File -> Import Settings... a vybrat cestu k "codeStyle.jar"
-
 # Team
 
 ## Petr Paroubek
