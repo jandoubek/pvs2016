@@ -82,8 +82,8 @@ public class PreviewActivity extends Activity {
 	}
 
 	public void sessionCompleteButtonClicked(View view) {
-		startActivity(new Intent(this, CompleteSessionActivity.class));
 		this.finish();
+		startActivity(new Intent(this, CompleteSessionActivity.class));
 	}
 
 	private void deleteImage() {
