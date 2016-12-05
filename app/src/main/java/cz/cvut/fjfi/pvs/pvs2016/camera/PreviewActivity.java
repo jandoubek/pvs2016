@@ -2,6 +2,8 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 
 import java.io.File;
 
+import org.bytedeco.javacpp.opencv_core;
+
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.squareup.picasso.Callback;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
+import cz.cvut.fjfi.pvs.pvs2016.util.ImageUtils;
 
 public class PreviewActivity extends Activity {
 
@@ -30,7 +33,15 @@ public class PreviewActivity extends Activity {
 		this.persistPicturePath();
 		setContentView(R.layout.activity_preview);
 		setUpPicasso();
+		enhanceImage();
 		showPictureZoomable(this.picturePath);
+	}
+
+	private void enhanceImage() {
+		File imageFile = new File(this.picturePath);
+		opencv_core.Mat mat = ImageUtils.loadFileToMat(imageFile);
+		mat = ImageUtils.linearTransformation(mat, 1.5, 0);
+		ImageUtils.saveMatToFile(mat, imageFile);
 	}
 
 	private void persistPicturePath() {
