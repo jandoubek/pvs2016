@@ -36,6 +36,7 @@
 				  android:theme="@style/NoActionBar"/>
 		<activity android:name=".camera.PreviewActivity"/>
 		<activity android:name=".camera.CompleteSessionActivity"/>
+		<activity android:name=".camera.RearrangementActivity"/>
 	</application>
 
 </manifest>

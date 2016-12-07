@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
+import cz.cvut.fjfi.pvs.pvs2016.camera.RearrangementActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void onShowTable(View view) {
-		Intent intent = new Intent(this, TableActivity.class);
+		Intent intent = new Intent(this, RearrangementActivity.class);
 		startActivity(intent);
 	}
 
