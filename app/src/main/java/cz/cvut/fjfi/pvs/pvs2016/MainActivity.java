@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,10 +43,4 @@ public class MainActivity extends AppCompatActivity {
 	public void takePhoto(View view) {
 		startActivity(new Intent(this, CameraActivity.class));
 	}
-
-	public void onShowTable(View view) {
-		Intent intent = new Intent(this, TableActivity.class);
-		startActivity(intent);
-	}
-
 }

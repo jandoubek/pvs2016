@@ -7,4 +7,5 @@
 	<string name="btn_discard">Zahodit</string>
 	<string name="btn_nextPicture">Další</string>
 	<string name="btn_sessionComplete">Hotovo</string>
+	<string name="title_activity_browser">Prohlížeč</string>
 </resources>
