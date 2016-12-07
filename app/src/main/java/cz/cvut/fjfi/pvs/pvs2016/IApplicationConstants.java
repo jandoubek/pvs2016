@@ -4,5 +4,4 @@ public interface IApplicationConstants {
 
 	String DIRECTORY_NAME = "LectureNotes";
 
-
 }

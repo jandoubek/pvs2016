@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  tools:context=".MainActivity">
 
-    <include layout="@layout/action_toolbar" />
+	<include layout="@layout/action_toolbar"/>
 
-    <Button
-        android:id="@+id/magicButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="takePhoto"
-        android:text="@string/take_photo" />
+	<Button
+			android:id="@+id/magicButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:onClick="takePhoto"
+			android:text="@string/take_photo"/>
 
 </LinearLayout>
