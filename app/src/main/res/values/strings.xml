@@ -9,4 +9,7 @@
     <string name="btn_discard">Discard</string>
     <string name="btn_nextPicture">Next</string>
     <string name="btn_sessionComplete">Finish</string>
+	<string name="tagsTextView_hint">Tags</string>
+    <string name="complete_session_save_button_label">Save</string>
+    <string name="complete_session_cancel_button_label">Cancel</string>
 </resources>
