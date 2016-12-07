@@ -14,11 +14,17 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.gson.Gson;
+
+import android.os.Environment;
+import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
+import cz.cvut.fjfi.pvs.pvs2016.Photo;
 
 public class FileUtils {
 
 	private static final String logIdentifier = "FileUtils";
+
 	public static final int MEDIA_TYPE_IMAGE = 1;
 
 	@Nullable
@@ -30,8 +36,7 @@ public class FileUtils {
 			// handle differently
 		}
 
-		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-				Environment.DIRECTORY_PICTURES), IApplicationConstants.DIRECTORY_NAME);
+		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IApplicationConstants.DIRECTORY_NAME);
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 
@@ -109,5 +114,12 @@ public class FileUtils {
 			}
 		}
 		return true;
+	}
+
+	public static boolean createMetadataJsonFile(Photo photo) {
+		Gson gson = new Gson();
+		String json = gson.toJson(photo);
+		// FIXME path should be obtained from Photo object
+		return writeToFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), photo.label + ".json"), json.getBytes());
 	}
 }

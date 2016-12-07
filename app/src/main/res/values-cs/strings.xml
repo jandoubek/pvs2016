@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">Zápisky</string>
+    <string name="app_name">Zápisky</string>
 	<string name="toolbar_settings">Nastavení</string>
 	<string name="toolbar_help">Nápověda</string>
 	<string name="title_activity_table">Tabulka</string>
@@ -7,5 +7,7 @@
 	<string name="btn_discard">Zahodit</string>
 	<string name="btn_nextPicture">Další</string>
 	<string name="btn_sessionComplete">Hotovo</string>
-	<string name="title_activity_browser">Prohlížeč</string>
+	<string name="tagsTextView_hint">Tagy</string>
+	<string name="complete_session_save_button_label">Uložit</string>
+	<string name="complete_session_cancel_button_label">Zrušit</string>
 </resources>

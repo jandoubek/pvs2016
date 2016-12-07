@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="cz.cvut.fjfi.pvs.pvs2016">
+          package="cz.cvut.fjfi.pvs.pvs2016">
 
-	<!-- Permissions -->
-	<uses-permission android:name="android.permission.CAMERA"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-	<!-- Camera's features -->
-	<uses-feature
-			android:name="android.permission.camera"
-			android:required="true"/>
-	<uses-feature android:name="android.hardware.camera.flash"/>
-	<uses-feature android:name="android.hardware.camera.autofocus"/>
+    <!-- Camera's features -->
+    <uses-feature
+            android:name="android.permission.camera"
+            android:required="true"/>
+    <uses-feature android:name="android.hardware.camera.flash"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
 	<application
 			android:allowBackup="true"
-			android:icon="@mipmap/ic_launcher"
+			android:icon="@mipmap/app_icon"
 			android:label="@string/app_name"
 			android:supportsRtl="true"
 			android:theme="@style/AppTheme">

@@ -2,7 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:paddingLeft="@dimen/activity_horizontal_margin"
+			  android:paddingRight="@dimen/activity_horizontal_margin"
+			  android:paddingTop="@dimen/activity_vertical_margin"
+			  android:paddingBottom="@dimen/activity_vertical_margin">
 
 	<EditText
 			android:layout_width="match_parent"
@@ -13,5 +17,31 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:hint="Whatever"/>
+
+	<cz.cvut.fjfi.pvs.pvs2016.TagsCompletionView
+			android:id="@+id/tagsTextView"
+			android:hint="@string/tagsTextView_hint"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+		<Button
+				android:text="@string/complete_session_cancel_button_label"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"/>
+
+		<Button
+				android:text="@string/complete_session_save_button_label"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:onClick="saveSession"/>
+
+	</LinearLayout>
 
 </LinearLayout>

@@ -8,9 +8,9 @@ import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
@@ -35,6 +35,7 @@ public class CameraActivity extends Activity {
 			self.startActivity(previewIntent);
 			FileUtils.writeToFile(pictureFile, data);
 			camera.startPreview();
+			self.finish();
 		}
 	};
 
@@ -52,7 +53,6 @@ public class CameraActivity extends Activity {
 		FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
 		preview.addView(cameraPreview);
 		initializeCaptureButton();
-		ensureHiddenStatusBar();
 	}
 
 	@Override
@@ -67,15 +67,8 @@ public class CameraActivity extends Activity {
 		}
 	}
 
-	private void ensureHiddenStatusBar() {
-		View decorView = getWindow().getDecorView();
-		// Hide the status bar.
-		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-		//		decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-	}
-
 	private void initializeCaptureButton() {
-		Button captureButton = (Button) findViewById(R.id.buttonCapture);
+		FloatingActionButton captureButton = (FloatingActionButton) findViewById(R.id.buttonCapture);
 		captureButton.setOnClickListener(
 				new View.OnClickListener() {
 					@Override
