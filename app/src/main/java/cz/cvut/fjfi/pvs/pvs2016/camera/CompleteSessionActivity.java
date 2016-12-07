@@ -19,6 +19,7 @@ public class CompleteSessionActivity extends Activity {
 	}
 
 	public void saveSession(View v) {
+		// FIXME first data model including must be implemented
 		TagsCompletionView tagsView = (TagsCompletionView) findViewById(R.id.tagsTextView);
 		Photo photo = new Photo(3, "bla", tagsView.getObjects().toArray(new String[tagsView.getObjects().size()]));
 		if (FileUtils.createMetadataJsonFile(photo)) {

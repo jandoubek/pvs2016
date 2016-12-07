@@ -17,7 +17,6 @@ import cz.cvut.fjfi.pvs.pvs2016.Photo;
 public class FileUtils {
 
 	private static final String logIdentifier = "FileUtils";
-	private static final File SYSTEM_PICTURES_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
 	public static final int MEDIA_TYPE_IMAGE = 1;
 
@@ -33,7 +32,7 @@ public class FileUtils {
 			return null;
 		}
 
-		File mediaStorageDir = new File(SYSTEM_PICTURES_DIR, IApplicationConstants.DIRECTORY_NAME);
+		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IApplicationConstants.DIRECTORY_NAME);
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 
@@ -91,6 +90,7 @@ public class FileUtils {
 	public static boolean createMetadataJsonFile(Photo photo) {
 		Gson gson = new Gson();
 		String json = gson.toJson(photo);
-		return writeToFile(new File(SYSTEM_PICTURES_DIR, photo.label + ".json"), json.getBytes());
+		// FIXME path should be obtained from Photo object
+		return writeToFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), photo.label + ".json"), json.getBytes());
 	}
 }
