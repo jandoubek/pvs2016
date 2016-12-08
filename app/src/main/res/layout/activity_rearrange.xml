@@ -7,8 +7,9 @@
 			  android:orientation="vertical"
 			  tools:context=".camera.RearrangementActivity">
 
+			<!--class="cz.cvut.fjfi.pvs.pvs2016.camera.MainFragment"-->
 	<fragment
-			class="cz.cvut.fjfi.pvs.pvs2016.camera.MainFragment"
+			class="cz.cvut.fjfi.pvs.pvs2016.camera.RecyclerGridFragment"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 </LinearLayout>
