@@ -1,9 +1,5 @@
 package cz.cvut.fjfi.pvs.pvs2016.util;
 
-import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,18 +10,27 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.gson.Gson;
-
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
-import cz.cvut.fjfi.pvs.pvs2016.Photo;
 
 public class FileUtils {
 
 	private static final String logIdentifier = "FileUtils";
 
 	public static final int MEDIA_TYPE_IMAGE = 1;
+	private static final String imageExtension = "jpg";
+	private static final Pattern imageFilenamePattern = Pattern.compile("(IMG_\\d{8}_\\d{6})\\." + imageExtension);
+
+	private static final Pattern JSONFilenamePattern = Pattern.compile("(IMG_\\d{8}_\\d{6})\\.json");
+	public static final FilenameFilter JSONFilenameFilter = new FilenameFilter() {
+		public boolean accept(File directory, String fileName) {
+			if (!directory.equals(getMediaStorageDir())) return false;
+			Matcher m = JSONFilenamePattern.matcher(fileName);
+			return m.matches();
+		}
+	};
 
 	@Nullable
 	public static File getMediaStorageDir() {
@@ -49,15 +54,6 @@ public class FileUtils {
 		return mediaStorageDir;
 	}
 
-	private static final Pattern JSONFilenamePattern = Pattern.compile("IMG_\\d{8}_\\d{6}\\.json");
-	public static final FilenameFilter JSONFilenameFilter = new FilenameFilter() {
-		public boolean accept(File directory, String fileName) {
-			if (!directory.equals(getMediaStorageDir())) return false;
-			Matcher m = JSONFilenamePattern.matcher(fileName);
-			return m.matches();
-		}
-	};
-
 	public static File[] getMetadataFiles() {
 		File mediaStorageDir = getMediaStorageDir();
 		if (mediaStorageDir == null) return null;
@@ -74,15 +70,25 @@ public class FileUtils {
 
 		// Create a media file name
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		File mediaFile;
-		if (type == MEDIA_TYPE_IMAGE) {
-			mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-					"IMG_" + timeStamp + ".jpg");
-		} else {
+		String fileName = "IMG_" + timeStamp;
+		String fileExtension;
+		switch (type) {
+		case MEDIA_TYPE_IMAGE:
+			fileExtension = imageExtension;
+			break;
+		default:
 			return null;
 		}
 
+		File mediaFile = new File(mediaStorageDir, fileName + "." + fileExtension);
 		return mediaFile;
+	}
+
+	public static File getOutputMetadataFile(String imageFilePath) throws Exception {
+		Matcher m = imageFilenamePattern.matcher(imageFilePath);
+		if (!m.matches()) throw new Exception("Image file path does not match pattern.");
+		String fileName = m.group(1) + ".json";
+		return new File(getMediaStorageDir(), fileName);
 	}
 
 	public static boolean deleteFile(String picturePath) {
@@ -114,12 +120,5 @@ public class FileUtils {
 			}
 		}
 		return true;
-	}
-
-	public static boolean createMetadataJsonFile(Photo photo) {
-		Gson gson = new Gson();
-		String json = gson.toJson(photo);
-		// FIXME path should be obtained from Photo object
-		return writeToFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), photo.label + ".json"), json.getBytes());
 	}
 }

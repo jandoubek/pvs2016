@@ -1,17 +1,16 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
-import android.os.Environment;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 
 import org.junit.After;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-
+import android.os.Environment;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
-
-import static org.junit.Assert.assertTrue;
 
 public class FileUtilsUnitTest {
 

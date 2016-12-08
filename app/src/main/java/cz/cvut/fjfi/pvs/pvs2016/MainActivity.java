@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 
 public class MainActivity extends AppCompatActivity {
