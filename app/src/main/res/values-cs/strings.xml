@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Zápisky</string>
+	<string name="app_name">Zápisky</string>
 	<string name="toolbar_settings">Nastavení</string>
 	<string name="toolbar_help">Nápověda</string>
 	<string name="title_activity_table">Tabulka</string>

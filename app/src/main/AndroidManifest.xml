@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="cz.cvut.fjfi.pvs.pvs2016">
+		  package="cz.cvut.fjfi.pvs.pvs2016">
 
-    <!-- Permissions -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<!-- Permissions -->
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <!-- Camera's features -->
-    <uses-feature
-            android:name="android.permission.camera"
-            android:required="true"/>
-    <uses-feature android:name="android.hardware.camera.flash"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+	<!-- Camera's features -->
+	<uses-feature
+			android:name="android.permission.camera"
+			android:required="true"/>
+	<uses-feature android:name="android.hardware.camera.flash"/>
+	<uses-feature android:name="android.hardware.camera.autofocus"/>
 
 	<application
 			android:allowBackup="true"
@@ -25,15 +25,13 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".SettingsActivity"
-				  android:label="@string/toolbar_settings"/>
-		<activity android:name=".TableActivity"
-				  android:label="@string/title_activity_table"
-				  android:theme="@style/AppTheme">
-		</activity>
-		<activity android:name=".camera.CameraActivity"
-				  android:label="@string/app_name"
-				  android:theme="@style/NoActionBar"/>
+		<activity
+				android:name=".SettingsActivity"
+				android:label="@string/toolbar_settings"/>
+		<activity
+				android:name=".camera.CameraActivity"
+				android:label="@string/app_name"
+				android:theme="@style/NoActionBar"/>
 		<activity android:name=".camera.PreviewActivity"/>
 		<activity android:name=".camera.CompleteSessionActivity"/>
 	</application>

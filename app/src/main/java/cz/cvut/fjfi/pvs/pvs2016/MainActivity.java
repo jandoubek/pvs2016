@@ -42,10 +42,4 @@ public class MainActivity extends AppCompatActivity {
 	public void takePhoto(View view) {
 		startActivity(new Intent(this, CameraActivity.class));
 	}
-
-	public void onShowTable(View view) {
-		Intent intent = new Intent(this, TableActivity.class);
-		startActivity(intent);
-	}
-
 }
