@@ -23,7 +23,7 @@ import cz.cvut.fjfi.pvs.pvs2016.util.ImageUtils;
 public class PreviewActivity extends Activity {
 
 	private final String LOG_DESC = "PreviewActivity";
-	private String picturePathPamrameter = "picturePath";
+	private String picturePathParameter = "picturePath";
 	private String picturePath;
 	private Picasso picasso;
 
@@ -45,7 +45,7 @@ public class PreviewActivity extends Activity {
 	}
 
 	private void persistPicturePath() {
-		this.picturePath = getIntent().getStringExtra(picturePathPamrameter);
+		this.picturePath = getIntent().getStringExtra(picturePathParameter);
 	}
 
 	private void showPictureZoomable(String path) {

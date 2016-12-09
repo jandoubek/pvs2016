@@ -32,7 +32,7 @@ public class FileUtilsUnitTest {
 	}
 
 	@Test
-	public void medaStorageWriteTest() {
+	public void mediaStorageWriteTest() {
 		boolean success = FileUtils.writeToFile(this.testFile, testData);
 		assertTrue(success);
 	}
