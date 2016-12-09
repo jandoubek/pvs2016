@@ -1,4 +1,6 @@
-package cz.cvut.fjfi.pvs.pvs2016.camera;
+package cz.cvut.fjfi.pvs.pvs2016.rearrange;
+
+import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import cz.cvut.fjfi.pvs.pvs2016.R;
+import cz.cvut.fjfi.pvs.pvs2016.util.Photo;
 
 public class RecyclerGridFragment extends Fragment implements OnStartDragListener {
 
@@ -27,7 +30,10 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		final RecyclerListAdapter adapter = new RecyclerListAdapter(this);
+		RearrangementActivity activity = (RearrangementActivity) getActivity();
+		ArrayList<Photo> photoList = activity.getPhotoList();
+		//		todo put it to adapter
+		final RecyclerListAdapter adapter = new RecyclerListAdapter(this, photoList);
 
 		RecyclerView recyclerView = (RecyclerView) view;
 		recyclerView.setHasFixedSize(true);

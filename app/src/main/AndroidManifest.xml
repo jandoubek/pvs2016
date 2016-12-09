@@ -5,6 +5,7 @@
 	<!-- Permissions -->
 	<uses-permission android:name="android.permission.CAMERA"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
 
 	<!-- Camera's features -->
 	<uses-feature
@@ -34,7 +35,7 @@
 				android:theme="@style/NoActionBar"/>
 		<activity android:name=".camera.PreviewActivity"/>
 		<activity android:name=".camera.CompleteSessionActivity"/>
-		<activity android:name=".camera.RearrangementActivity"/>
+		<activity android:name=".rearrange.RearrangementActivity"/>
 	</application>
 
 </manifest>

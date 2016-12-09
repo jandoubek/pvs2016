@@ -2,7 +2,11 @@ package cz.cvut.fjfi.pvs.pvs2016.util;
 
 import java.util.HashSet;
 
-public class Photo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Photo implements Parcelable {
+
 	public static class Series {
 		public String name;
 		public int index;
@@ -43,6 +47,38 @@ public class Photo {
 		this.tags = tags;
 		this.series = series;
 		this.timestamp = timestamp;
+	}
+
+	public Photo(Parcel in) {
+		this.id = in.readString();
+		this.path = in.readString();
+		this.tags = (HashSet<String>) in.readSerializable();
+		this.series = (HashSet<Series>) in.readSerializable();
+		this.timestamp = in.readString();
+	}
+
+	public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+		public Photo createFromParcel(Parcel in) {
+			return new Photo(in);
+		}
+
+		public Photo[] newArray(int size) {
+			return new Photo[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(id);
+		parcel.writeString(path);
+		parcel.writeSerializable(tags);
+		parcel.writeSerializable(series);
+		parcel.writeString(timestamp);
 	}
 
 	@Override

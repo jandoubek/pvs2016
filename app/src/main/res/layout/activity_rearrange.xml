@@ -5,11 +5,11 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
-			  tools:context=".camera.RearrangementActivity">
+			  tools:context=".rearrange.RearrangementActivity">
 
-			<!--class="cz.cvut.fjfi.pvs.pvs2016.camera.MainFragment"-->
+			<!--class="cz.cvut.fjfi.pvs.pvs2016.rearrange.MainFragment"-->
 	<fragment
-			class="cz.cvut.fjfi.pvs.pvs2016.camera.RecyclerGridFragment"
+			class="cz.cvut.fjfi.pvs.pvs2016.rearrange.RecyclerGridFragment"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 </LinearLayout>

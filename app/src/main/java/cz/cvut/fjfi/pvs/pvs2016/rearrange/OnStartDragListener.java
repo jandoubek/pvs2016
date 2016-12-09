@@ -1,4 +1,4 @@
-package cz.cvut.fjfi.pvs.pvs2016.camera;
+package cz.cvut.fjfi.pvs.pvs2016.rearrange;
 
 import android.support.v7.widget.RecyclerView;
 
