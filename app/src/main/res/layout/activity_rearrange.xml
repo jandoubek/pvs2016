@@ -7,9 +7,16 @@
 			  android:orientation="vertical"
 			  tools:context=".rearrange.RearrangementActivity">
 
-			<!--class="cz.cvut.fjfi.pvs.pvs2016.rearrange.MainFragment"-->
+	<Button android:id="@+id/finishReordering"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:onClick="finishReordering"
+			android:text="@string/finishReordering"/>
+
 	<fragment
 			class="cz.cvut.fjfi.pvs.pvs2016.rearrange.RecyclerGridFragment"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
+
+
 </LinearLayout>

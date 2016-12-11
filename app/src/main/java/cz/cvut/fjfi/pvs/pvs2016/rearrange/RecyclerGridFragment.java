@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import cz.cvut.fjfi.pvs.pvs2016.R;
-import cz.cvut.fjfi.pvs.pvs2016.util.Photo;
+import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class RecyclerGridFragment extends Fragment implements OnStartDragListener {
 
@@ -32,7 +32,6 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
 
 		RearrangementActivity activity = (RearrangementActivity) getActivity();
 		ArrayList<Photo> photoList = activity.getPhotoList();
-		//		todo put it to adapter
 		final RecyclerListAdapter adapter = new RecyclerListAdapter(this, photoList);
 
 		RecyclerView recyclerView = (RecyclerView) view;
