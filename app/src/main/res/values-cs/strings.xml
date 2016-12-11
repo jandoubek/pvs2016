@@ -7,7 +7,8 @@
 	<string name="btn_discard">Zahodit</string>
 	<string name="btn_nextPicture">Další</string>
 	<string name="btn_sessionComplete">Hotovo</string>
-	<string name="tagsTextView_hint">Tagy</string>
-	<string name="complete_session_save_button_label">Uložit</string>
+	<string name="tagsCompletionView_hint">Tagy</string>
+	<string name="complete_session_continue_button_label">Pokračovat</string>
 	<string name="complete_session_cancel_button_label">Zrušit</string>
+	<string name="seriesCompletionView_hint">Série</string>
 </resources>
