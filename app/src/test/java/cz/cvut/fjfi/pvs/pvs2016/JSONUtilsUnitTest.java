@@ -14,7 +14,6 @@ import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
-import android.net.Uri;
 import android.os.Environment;
 import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 import cz.cvut.fjfi.pvs.pvs2016.model.Series;

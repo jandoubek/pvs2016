@@ -1,6 +1,7 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,7 @@ public class PhotosStaticCache {
 		return cachedPhotos.add(photo);
 	}
 
-	public static boolean addPhotos(List<Photo> photoList) {
+	public static boolean addPhotos(Collection<Photo> photoList) {
 		return cachedPhotos.addAll(photoList);
 	}
 
@@ -25,7 +26,7 @@ public class PhotosStaticCache {
 		return cachedPhotos.remove(photo);
 	}
 
-	public static boolean removePhotos(List<Photo> photoList) {
+	public static boolean removePhotos(Collection<Photo> photoList) {
 		return cachedPhotos.removeAll(photoList);
 	}
 
@@ -64,7 +65,7 @@ public class PhotosStaticCache {
 		Set<Series> filteredSeries = new HashSet<>();
 		for (Photo p : cachedPhotos) {
 			for (Series s : p.getSeries()) {
-				if (s.getName().equals(seriesName) && !!filteredSeries.contains(s)) {
+				if (s.getName().equals(seriesName) && !filteredSeries.contains(s)) {
 					filteredSeries.add(s);
 				}
 			}
