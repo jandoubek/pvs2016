@@ -10,16 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class TagsCompletionView extends TokenCompleteTextView<String> {
+public class TokenCompletionView extends TokenCompleteTextView<String> {
 
-	public TagsCompletionView(Context context, AttributeSet attrs) {
+	public TokenCompletionView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		setSplitChar(new char[] {',', ' ', ';'});
+		setThreshold(1);
 	}
 
 	@Override
 	protected View getViewForObject(String tag) {
 		LayoutInflater l = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		TextView view = (TextView) l.inflate(R.layout.tag_token, (ViewGroup) getParent(), false);
+		TextView view = (TextView) l.inflate(R.layout.completion_view_token, (ViewGroup) getParent(), false);
 		view.setText(tag);
 		return view;
 	}

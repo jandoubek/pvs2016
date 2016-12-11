@@ -7,8 +7,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -20,16 +18,15 @@ public class FileUtils {
 	private static final String logIdentifier = "FileUtils";
 
 	public static final int MEDIA_TYPE_IMAGE = 1;
-	private static final String imageExtension = "jpg";
-	private static final Pattern imageFilenamePattern = Pattern.compile("(IMG_\\d{8}_\\d{6})\\." + imageExtension);
+	private static final String IMAGE_EXTENSION = ".jpg";
 
-	private static final Pattern JSONFilenamePattern = Pattern.compile("(IMG_\\d{8}_\\d{6})\\.json");
-	public static final FilenameFilter JSONFilenameFilter = new FilenameFilter() {
+	private static final FilenameFilter JSON_FILENAME_FILTER = new FilenameFilter() {
+
 		public boolean accept(File directory, String fileName) {
 			if (!directory.equals(getMediaStorageDir())) return false;
-			Matcher m = JSONFilenamePattern.matcher(fileName);
-			return m.matches();
+			return fileName.toLowerCase().endsWith(".json");
 		}
+
 	};
 
 	@Nullable
@@ -57,7 +54,7 @@ public class FileUtils {
 	public static File[] getMetadataFiles() {
 		File mediaStorageDir = getMediaStorageDir();
 		if (mediaStorageDir == null) return null;
-		return mediaStorageDir.listFiles(JSONFilenameFilter);
+		return mediaStorageDir.listFiles(JSON_FILENAME_FILTER);
 	}
 
 	/**
@@ -74,21 +71,21 @@ public class FileUtils {
 		String fileExtension;
 		switch (type) {
 		case MEDIA_TYPE_IMAGE:
-			fileExtension = imageExtension;
+			fileExtension = IMAGE_EXTENSION;
 			break;
 		default:
 			return null;
 		}
 
-		File mediaFile = new File(mediaStorageDir, fileName + "." + fileExtension);
+		File mediaFile = new File(mediaStorageDir, fileName + fileExtension);
 		return mediaFile;
 	}
 
 	public static File getOutputMetadataFile(String imageFilePath) throws Exception {
-		Matcher m = imageFilenamePattern.matcher(imageFilePath);
-		if (!m.matches()) throw new Exception("Image file path does not match pattern.");
-		String fileName = m.group(1) + ".json";
-		return new File(getMediaStorageDir(), fileName);
+		// TODO handle saving metadata to different place than pictures
+		int i = imageFilePath.lastIndexOf(IMAGE_EXTENSION);
+		String metadataPath = imageFilePath.substring(0, i) + ".json";
+		return new File(metadataPath);
 	}
 
 	public static boolean deleteFile(String picturePath) {

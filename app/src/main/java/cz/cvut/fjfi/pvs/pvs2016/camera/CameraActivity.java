@@ -1,6 +1,7 @@
 package cz.cvut.fjfi.pvs.pvs2016.camera;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
@@ -21,6 +23,7 @@ public class CameraActivity extends Activity {
 
 	private Camera camera;
 	private CameraPreview cameraPreview;
+	private ArrayList<String> sessionPicturePaths;
 
 	private PictureCallback pictureCallback = new PictureCallback() {
 		@Override
@@ -31,7 +34,8 @@ public class CameraActivity extends Activity {
 				return;
 			}
 			Intent previewIntent = new Intent(self, PreviewActivity.class);
-			previewIntent.putExtra("picturePath", pictureFile.getPath());
+			sessionPicturePaths.add(pictureFile.getPath());
+			previewIntent.putStringArrayListExtra(IApplicationConstants.PICTURES_PATHS_INTENT_EXTRA, sessionPicturePaths);
 			self.startActivity(previewIntent);
 			FileUtils.writeToFile(pictureFile, data);
 			camera.startPreview();
@@ -43,6 +47,12 @@ public class CameraActivity extends Activity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera);
+		if (getIntent().getExtras() != null) {
+			sessionPicturePaths = getIntent().getExtras().getStringArrayList(IApplicationConstants.PICTURES_PATHS_INTENT_EXTRA);
+		}
+		if (sessionPicturePaths == null) {
+			sessionPicturePaths = new ArrayList<>();
+		}
 	}
 
 	@Override
