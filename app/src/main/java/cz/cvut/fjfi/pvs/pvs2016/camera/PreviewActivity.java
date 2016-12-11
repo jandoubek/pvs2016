@@ -1,6 +1,7 @@
 package cz.cvut.fjfi.pvs.pvs2016.camera;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.bytedeco.javacpp.opencv_core;
 
@@ -16,36 +17,40 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.ImageUtils;
 
+/**
+ * When starting this activity non-empty list under key {@link IApplicationConstants#PICTURES_PATHS_INTENT_EXTRA}
+ * in {@link Intent#getExtras()} <b>MUST</b> be set using {@link Intent#putStringArrayListExtra(String, ArrayList)}.
+ */
 public class PreviewActivity extends Activity {
 
 	private final String LOG_DESC = "PreviewActivity";
-	private String picturePathParameter = "picturePath";
-	private String picturePath;
+	private ArrayList<String> sessionPicturePaths;
 	private Picasso picasso;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.persistPicturePath();
+		sessionPicturePaths = getIntent().getStringArrayListExtra(IApplicationConstants.PICTURES_PATHS_INTENT_EXTRA);
 		setContentView(R.layout.activity_preview);
 		setUpPicasso();
 		enhanceImage();
-		showPictureZoomable(this.picturePath);
+		showPictureZoomable(getCurrentPicturePath());
 	}
 
 	private void enhanceImage() {
-		File imageFile = new File(this.picturePath);
+		File imageFile = new File(getCurrentPicturePath());
 		opencv_core.Mat mat = ImageUtils.loadFileToMat(imageFile);
 		mat = ImageUtils.linearTransformation(mat, 1.5, 0);
 		ImageUtils.saveMatToFile(mat, imageFile);
 	}
 
-	private void persistPicturePath() {
-		this.picturePath = getIntent().getStringExtra(picturePathParameter);
+	private String getCurrentPicturePath() {
+		return sessionPicturePaths.get(sessionPicturePaths.size() - 1);
 	}
 
 	private void showPictureZoomable(String path) {
@@ -85,22 +90,31 @@ public class PreviewActivity extends Activity {
 	public void discardButtonClicked(View view) {
 		deleteImage();
 		this.finish();
+		startActivity(createActivityIntentWithExtra(CameraActivity.class));
 	}
 
 	public void nextPictureButtonClicked(View view) {
-		//		todo create meta files, etc.
 		this.finish();
+		startActivity(createActivityIntentWithExtra(CameraActivity.class));
 	}
 
 	public void sessionCompleteButtonClicked(View view) {
 		this.finish();
-		startActivity(new Intent(this, CompleteSessionActivity.class));
+		startActivity(createActivityIntentWithExtra(CompleteSessionActivity.class));
+	}
+
+	private Intent createActivityIntentWithExtra(Class clazz) {
+		Intent cameraIntent = new Intent(this, clazz);
+		cameraIntent.putStringArrayListExtra(IApplicationConstants.PICTURES_PATHS_INTENT_EXTRA, sessionPicturePaths);
+		return cameraIntent;
 	}
 
 	private void deleteImage() {
-		boolean deleted = FileUtils.deleteFile(picturePath);
+		String currentPicturePath = getCurrentPicturePath();
+		boolean deleted = FileUtils.deleteFile(currentPicturePath);
+		sessionPicturePaths.remove(currentPicturePath);
 		if (!deleted) {
-			Log.e("PreviewActivity", "Could not delete file: " + picturePath);
+			Log.e("PreviewActivity", "Could not delete file: " + currentPicturePath);
 		}
 	}
 }

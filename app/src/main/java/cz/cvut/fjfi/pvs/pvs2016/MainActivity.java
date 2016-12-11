@@ -1,11 +1,9 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,8 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
-import cz.cvut.fjfi.pvs.pvs2016.rearrange.RearrangementActivity;
-import cz.cvut.fjfi.pvs.pvs2016.util.Photo;
+import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		Toolbar myToolbar = (Toolbar) findViewById(R.id.main_activity_toolbar);
 		setSupportActionBar(myToolbar);
+
+		// initialize photos cache
+		try {
+			PhotosStaticCache.addPhotos(JSONUtils.getPhotoList());
+		} catch (IOException e) {
+			// FIXME what we want to do when loading metadata files fails? Quit app, continue like nothing happens or notify user?
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -46,24 +51,6 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void takePhoto(View view) {
-		Intent i = new Intent(this, RearrangementActivity.class);
-		Bundle myBundle = new Bundle();
-		myBundle.putParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER, new ArrayList<Parcelable>(1));
-		i.putExtras(myBundle);
-		startActivityForResult(i, 1);
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		if (requestCode == 1) {
-			if(resultCode == Activity.RESULT_OK){
-				Bundle bundle = data.getExtras();
-				ArrayList<Photo> photoList = bundle.getParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER);
-			}
-			if (resultCode == Activity.RESULT_CANCELED) {
-				//todo handle
-			}
-		}
+		startActivity(new Intent(this, CameraActivity.class));
 	}
 }

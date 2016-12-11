@@ -3,44 +3,40 @@ package cz.cvut.fjfi.pvs.pvs2016.util;
 import static cz.cvut.fjfi.pvs.pvs2016.util.FileUtils.getMetadataFiles;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 
-/**
- * Created by fnj on 6.12.16.
- */
+import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class JSONUtils {
-	public static ArrayList<Photo> getPhotoList(ArrayList<Photo> photoList) {
+
+	public static List<Photo> getPhotoList() throws IOException {
+		List<Photo> photoList = new ArrayList<>();
 		File metadataFiles[] = getMetadataFiles();
 		Gson gson = new Gson();
 		for (File metadataFile : metadataFiles) {
+			FileReader fileReader = null;
 			try {
-				Photo photo = gson.fromJson(new FileReader(metadataFile), Photo.class);
+				fileReader = new FileReader(metadataFile);
+				Photo photo = gson.fromJson(fileReader, Photo.class);
 				photoList.add(photo);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			} finally {
+				if (fileReader != null) {
+					fileReader.close();
+				}
 			}
 		}
 		return photoList;
 	}
 
-	public static ArrayList<Photo> getPhotoList() {
-		return getPhotoList(new ArrayList<Photo>());
-	}
-
-	public static boolean createMetadataFile(Photo photo) {
+	public static boolean createMetadataFile(Photo photo) throws Exception {
 		Gson gson = new Gson();
 		String json = gson.toJson(photo);
-		File outputFile = null;
-		try {
-			outputFile = FileUtils.getOutputMetadataFile(photo.path);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		File outputFile = FileUtils.getOutputMetadataFile(photo.getPath());
 		return FileUtils.writeToFile(outputFile, json.getBytes());
 	}
 }
