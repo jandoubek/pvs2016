@@ -37,8 +37,9 @@ public class PreviewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		sessionPicturePaths = getIntent().getStringArrayListExtra(IApplicationConstants.PICTURES_PATHS_INTENT_EXTRA);
 		setContentView(R.layout.activity_preview);
-		setUpPicasso();
-		enhanceImage();
+		//dont want to use at this moment, todo enahnce speed
+		//setUpPicasso();
+		//enhanceImage();
 		showPictureZoomable(getCurrentPicturePath());
 	}
 

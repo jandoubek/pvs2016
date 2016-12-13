@@ -24,7 +24,6 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
 	@Override
 	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-//		int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
 		int dragFlags = ItemTouchHelper.UP   | ItemTouchHelper.DOWN |
 				ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
 //		int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
@@ -47,7 +46,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	@Override
 	public void onSelectedChanged(RecyclerView.ViewHolder viewHolder,
 			int actionState) {
-		// We only want the active item
+		// only want active item
 		if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
 			if (viewHolder instanceof ItemTouchHelperViewHolder) {
 				ItemTouchHelperViewHolder itemViewHolder =

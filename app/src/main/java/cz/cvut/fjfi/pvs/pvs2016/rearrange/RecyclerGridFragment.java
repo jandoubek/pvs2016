@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
-public class RecyclerGridFragment extends Fragment implements OnStartDragListener {
+public class RecyclerGridFragment extends Fragment {
 
 	private ItemTouchHelper mItemTouchHelper;
 
@@ -32,7 +32,7 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
 
 		RearrangementActivity activity = (RearrangementActivity) getActivity();
 		ArrayList<Photo> photoList = activity.getPhotoList();
-		final RecyclerListAdapter adapter = new RecyclerListAdapter(this, photoList);
+		final RecyclerListAdapter adapter = new RecyclerListAdapter(photoList);
 
 		RecyclerView recyclerView = (RecyclerView) view;
 		recyclerView.setHasFixedSize(true);
@@ -46,11 +46,5 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
 		mItemTouchHelper = new ItemTouchHelper(callback);
 		mItemTouchHelper.attachToRecyclerView(recyclerView);
 	}
-
-	@Override
-	public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-		mItemTouchHelper.startDrag(viewHolder);
-	}
-
 
 }

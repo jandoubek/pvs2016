@@ -87,9 +87,11 @@ public class CompleteSessionActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				Bundle photoBundle = data.getExtras();
 				ArrayList<Photo> photoList = photoBundle.getParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER);
+				// duplicit saving to cache, need discussion about this, TODO
 				refreshCache(photoList);
 				for (Photo p : photoList) {
 					try {
+						// duplicit creation of meta-files, TODO
 						JSONUtils.createMetadataFile(p);
 					} catch (Exception e) {
 						Log.e(this.getClass().getSimpleName(), "Cannot create metadata file for picture with path: " + p.getPath());

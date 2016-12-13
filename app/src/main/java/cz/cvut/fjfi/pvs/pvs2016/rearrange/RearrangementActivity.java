@@ -30,11 +30,16 @@ public class RearrangementActivity extends FragmentActivity {
 	}
 
 	public void finishReordering(View view) {
-		Intent returnIntent = new Intent();
-		Bundle resultPhotoListBundle = new Bundle();
-		resultPhotoListBundle.putParcelableArrayList(PHOTO_LIST_PARAMETER, photoList);
-		returnIntent.putExtras(resultPhotoListBundle);
+		Intent returnIntent = prepareIntentWithBundle(photoList);
 		setResult(Activity.RESULT_OK, returnIntent);
 		finish();
+	}
+
+	private Intent prepareIntentWithBundle(ArrayList bundledList) {
+		Intent returnIntent = new Intent();
+		Bundle resultPhotoListBundle = new Bundle();
+		resultPhotoListBundle.putParcelableArrayList(PHOTO_LIST_PARAMETER, bundledList);
+		returnIntent.putExtras(resultPhotoListBundle);
+		return returnIntent;
 	}
 }

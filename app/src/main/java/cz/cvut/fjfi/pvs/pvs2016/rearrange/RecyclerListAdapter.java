@@ -2,20 +2,15 @@ package cz.cvut.fjfi.pvs.pvs2016.rearrange;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 import com.squareup.picasso.Picasso;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +22,7 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 
 public class RecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> implements ItemTouchHelperAdapter {
 
-	private List<Photo> mItems = new ArrayList<>();
-
-	private final OnStartDragListener mStartDragListener;
+	private List<Photo> mItems;
 
 	private Context self;
 
@@ -39,9 +32,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 
 	private double ratio;
 
-	public RecyclerListAdapter(OnStartDragListener listener, ArrayList<Photo> data) {
+	public RecyclerListAdapter(ArrayList<Photo> data) {
 		mItems = data;
-		mStartDragListener = listener;
 	}
 
 	@Override
@@ -51,7 +43,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 		View view = LayoutInflater.from(self).inflate(R.layout.item_main, parent, false);
 		Point screenDimensions = getScreenDimensions(self);
 		screenWidth = screenDimensions.x;
-		ratio = screenDimensions.x/screenDimensions.y;
+		ratio = screenDimensions.x / screenDimensions.y;
 		return new ItemViewHolder(view);
 	}
 
@@ -61,15 +53,15 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 		picasso.load(imageFile).resize(countWidth(), countHeight()).centerInside().into(holder.imageView);
 	}
 
-//	todo move these 3 to helper maybe?
+	//	todo move these 3 to helper maybe?
 	private int countWidth() {
 		int columns = self.getResources().getInteger(R.integer.grid_columns);
 		int margin = (int) (self.getResources().getDimension(R.dimen.img_margin) / self.getResources().getDisplayMetrics().density);
-		return screenWidth/columns - 2 * margin;
+		return screenWidth / columns - 2 * margin;
 	}
 
 	private int countHeight() {
-		return (int) (countWidth()/ratio);
+		return (int) (countWidth() / ratio);
 	}
 
 	private Point getScreenDimensions(Context context) {
@@ -117,6 +109,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 
 	@Override
 	public void onItemDismiss(int position) {
+		//is not used at the moment
 		mItems.remove(position);
 		notifyItemRemoved(position);
 	}
