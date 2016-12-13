@@ -3,7 +3,6 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import android.app.Activity;
@@ -60,7 +59,7 @@ public class CompleteSessionActivity extends Activity {
 				Log.e(this.getClass().getSimpleName(), "Cannot create metadata file for picture with path: " + sessionPicturePaths.get(i));
 			}
 		}
-		startActivityForResult(creteIntentWithArrayListBundle(photoList), 1);
+		startActivityForResult(creteIntentWithArrayListBundle(photoList), RearrangementActivity.REARRANGEMENT_REQUEST_CODE);
 		Toast.makeText(this, "Successfully saved!", Toast.LENGTH_SHORT).show();
 	}
 
@@ -83,7 +82,7 @@ public class CompleteSessionActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if (requestCode == 1) {
+		if (requestCode == RearrangementActivity.REARRANGEMENT_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
 				Bundle photoBundle = data.getExtras();
 				ArrayList<Photo> photoList = photoBundle.getParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER);

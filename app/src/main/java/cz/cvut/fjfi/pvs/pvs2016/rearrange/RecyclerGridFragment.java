@@ -16,8 +16,6 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class RecyclerGridFragment extends Fragment {
 
-	private ItemTouchHelper mItemTouchHelper;
-
 	public RecyclerGridFragment() {
 	}
 
@@ -43,7 +41,7 @@ public class RecyclerGridFragment extends Fragment {
 		recyclerView.setLayoutManager(layoutManager);
 
 		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
-		mItemTouchHelper = new ItemTouchHelper(callback);
+		ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
 		mItemTouchHelper.attachToRecyclerView(recyclerView);
 	}
 

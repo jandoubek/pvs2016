@@ -15,6 +15,8 @@ public class RearrangementActivity extends FragmentActivity {
 
 	public static final String PHOTO_LIST_PARAMETER = "photoList";
 
+	public static final int REARRANGEMENT_REQUEST_CODE = 1;
+
 	private ArrayList<Photo> photoList;
 
 	@Override
