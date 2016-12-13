@@ -19,9 +19,8 @@ Fotozapisnikova aplikace pro ukladani psanych poznamek do mobilniho telefonu. Je
 * Moravske Budejovice
 
 ## Martin Šindelář
-* SK Sigma Olomouc - obrance
-* Plant manager at ASSA Alloy
-* Oddělení podpory informačních systémů - univerzita Pardubice
+* Specialista pro grafikcou úpravu
+* Tester
 
 ## František Navrkal
 * [pirátský životopis](https://pirati.cz/lide/frantisek_navrkal)

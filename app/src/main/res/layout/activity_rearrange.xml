@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:id="@+id/main_container"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  tools:context=".rearrange.RearrangementActivity">
+
+	<Button android:id="@+id/finishReordering"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:onClick="finishReordering"
+			android:text="@string/finishReordering"/>
+
+	<fragment
+			class="cz.cvut.fjfi.pvs.pvs2016.rearrange.RecyclerGridFragment"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+
+
+</LinearLayout>

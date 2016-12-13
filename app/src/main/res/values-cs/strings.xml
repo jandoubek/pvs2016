@@ -11,4 +11,5 @@
 	<string name="complete_session_continue_button_label">Pokračovat</string>
 	<string name="complete_session_cancel_button_label">Zrušit</string>
 	<string name="seriesCompletionView_hint">Série</string>
+	<string name="finishReordering">Ukončit přeskupování</string>
 </resources>

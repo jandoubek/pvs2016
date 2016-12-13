@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,6 +19,7 @@ import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.TokenCompletionView;
 import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 import cz.cvut.fjfi.pvs.pvs2016.model.Series;
+import cz.cvut.fjfi.pvs.pvs2016.rearrange.RearrangementActivity;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
@@ -57,12 +59,16 @@ public class CompleteSessionActivity extends Activity {
 				Log.e(this.getClass().getSimpleName(), "Cannot create metadata file for picture with path: " + sessionPicturePaths.get(i));
 			}
 		}
-		// TODO pass photos from current session to activity taking care of reordering them
-		//		Intent reorderAndCompleteIntent = new Intent(this, ACTIVITY_NAME.class);
-		//		reorderAndCompleteIntent.putParcelableArrayListExtra("extra_name", photoList);
-		//		startActivity(reorderAndCompleteIntent);
+		startActivityForResult(creteIntentWithArrayListBundle(photoList), RearrangementActivity.REARRANGEMENT_REQUEST_CODE);
 		Toast.makeText(this, "Successfully saved!", Toast.LENGTH_SHORT).show();
-		finish();
+	}
+
+	private Intent creteIntentWithArrayListBundle(ArrayList list) {
+		Intent reorderAndCompleteIntent = new Intent(this, RearrangementActivity.class);
+		Bundle photoBundle = new Bundle();
+		photoBundle.putParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER, list);
+		reorderAndCompleteIntent.putExtras(photoBundle);
+		return reorderAndCompleteIntent;
 	}
 
 	public void cancelSession(View view) {
@@ -71,6 +77,36 @@ public class CompleteSessionActivity extends Activity {
 			FileUtils.deleteFile(path);
 		}
 		finish();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == RearrangementActivity.REARRANGEMENT_REQUEST_CODE) {
+			if (resultCode == Activity.RESULT_OK) {
+				Bundle photoBundle = data.getExtras();
+				ArrayList<Photo> photoList = photoBundle.getParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER);
+				// duplicit saving to cache, need discussion about this, TODO
+				refreshCache(photoList);
+				for (Photo p : photoList) {
+					try {
+						// duplicit creation of meta-files, TODO
+						JSONUtils.createMetadataFile(p);
+					} catch (Exception e) {
+						Log.e(this.getClass().getSimpleName(), "Cannot create metadata file for picture with path: " + p.getPath());
+					}
+				}
+			}
+			if (resultCode == Activity.RESULT_CANCELED) {
+				//todo handle
+			}
+		}
+		finish();
+	}
+
+	private void refreshCache(ArrayList<Photo> photoList) {
+		PhotosStaticCache.removePhotos(photoList);
+		PhotosStaticCache.addPhotos(photoList);
 	}
 
 }

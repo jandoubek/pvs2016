@@ -1,10 +1,14 @@
 package cz.cvut.fjfi.pvs.pvs2016.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
-public class Photo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Photo implements Parcelable {
 
 	private String id;
 	private String path;
@@ -18,6 +22,38 @@ public class Photo {
 		this.tags = tags;
 		this.series = series;
 		this.timestamp = timestamp;
+	}
+
+	public Photo(Parcel in) {
+		this.id = in.readString();
+		this.path = in.readString();
+		this.tags = (Set<String>) in.readSerializable();
+		this.series = (Set<Series>) in.readSerializable();
+		this.timestamp = in.readString();
+	}
+
+	public static final Parcelable.Creator<Photo> CREATOR = new Parcelable.Creator<Photo>() {
+		public Photo createFromParcel(Parcel in) {
+			return new Photo(in);
+		}
+
+		public Photo[] newArray(int size) {
+			return new Photo[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(id);
+		parcel.writeString(path);
+		parcel.writeSerializable((Serializable) tags);
+		parcel.writeSerializable((Serializable) series);
+		parcel.writeString(timestamp);
 	}
 
 	public String getId() {

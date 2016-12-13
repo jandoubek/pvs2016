@@ -13,4 +13,5 @@
 	<string name="complete_session_continue_button_label">Continue</string>
 	<string name="complete_session_cancel_button_label">Cancel</string>
 	<string name="seriesCompletionView_hint">Series</string>
+	<string name="finishReordering">Finish reordering</string>
 </resources>

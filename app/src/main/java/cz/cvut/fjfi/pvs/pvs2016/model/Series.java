@@ -1,6 +1,8 @@
 package cz.cvut.fjfi.pvs.pvs2016.model;
 
-public class Series {
+import java.io.Serializable;
+
+public class Series implements Serializable {
 
 	private String name;
 	private int index;
