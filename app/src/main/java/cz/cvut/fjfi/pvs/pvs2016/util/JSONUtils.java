@@ -16,7 +16,7 @@ public class JSONUtils {
 
 	public static List<Photo> getPhotoList() throws IOException {
 		List<Photo> photoList = new ArrayList<>();
-		File metadataFiles[] = getMetadataFiles();
+		List<File> metadataFiles = getMetadataFiles();
 		Gson gson = new Gson();
 		for (File metadataFile : metadataFiles) {
 			FileReader fileReader = null;

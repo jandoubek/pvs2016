@@ -1,16 +1,20 @@
 package cz.cvut.fjfi.pvs.pvs2016.util;
 
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 
 public class FileUtils {
@@ -51,10 +55,15 @@ public class FileUtils {
 		return mediaStorageDir;
 	}
 
-	public static File[] getMetadataFiles() {
+	public static List<File> getMetadataFiles() {
 		File mediaStorageDir = getMediaStorageDir();
-		if (mediaStorageDir == null) return null;
-		return mediaStorageDir.listFiles(JSON_FILENAME_FILTER);
+		if (mediaStorageDir == null) return new ArrayList<>();
+		File[] files = mediaStorageDir.listFiles(JSON_FILENAME_FILTER);
+		if (files == null) {
+			return new ArrayList<>();
+		} else {
+			return Arrays.asList(files);
+		}
 	}
 
 	/**
