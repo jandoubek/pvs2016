@@ -43,7 +43,7 @@ public class CompleteSessionActivity extends Activity {
 		TokenCompletionView seriesView = (TokenCompletionView) findViewById(R.id.seriesCompletionView);
 		Set<String> tagsSet = new HashSet<>(tagsView.getObjects());
 		// TODO handle adding to more series
-		Series s = new Series(seriesView.getObjects().isEmpty() ? seriesView.getObjects().get(0) : "");
+		Series s = new Series(!seriesView.getObjects().isEmpty() ? seriesView.getObjects().get(0) : "");
 		int actualSeriesSize = PhotosStaticCache.getLastIndexInSeries(s.getName());
 		// list of Photo objects to be passed to reordering activity
 		ArrayList<Photo> photoList = new ArrayList<>();

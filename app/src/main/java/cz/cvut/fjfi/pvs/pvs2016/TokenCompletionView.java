@@ -16,6 +16,7 @@ public class TokenCompletionView extends TokenCompleteTextView<String> {
 		super(context, attrs);
 		setSplitChar(new char[] {',', ' ', ';'});
 		setThreshold(1);
+		allowDuplicates(false);
 	}
 
 	@Override
