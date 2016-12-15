@@ -9,7 +9,7 @@
 
 	<!-- Camera's features -->
 	<uses-feature
-			android:name="android.permission.camera"
+			android:name="android.hardware.camera"
 			android:required="true"/>
 	<uses-feature android:name="android.hardware.camera.flash"/>
 	<uses-feature android:name="android.hardware.camera.autofocus"/>
