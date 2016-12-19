@@ -30,7 +30,7 @@ public class PhotosStaticCache {
 		return cachedPhotos.removeAll(photoList);
 	}
 
-	public List<Photo> getAll() {
+	public static List<Photo> getAll() {
 		return cachedPhotos;
 	}
 
