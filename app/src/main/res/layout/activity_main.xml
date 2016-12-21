@@ -13,5 +13,19 @@
 			android:layout_height="wrap_content"
 			android:onClick="takePhoto"
 			android:text="@string/take_photo"/>
-
+	<EditText
+			android:id="@+id/txtsearch"
+			android:layout_width="wrap_content"
+			android:layout_margin="5dp"
+			android:layout_height="wrap_content"
+			android:hint="Search"
+			android:textColor="@color/black"
+	/>
+	<ListView
+			android:id="@+id/listView1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:divider="@color/material_blue_grey_800"
+			android:dividerHeight="1dp" />
+	/>
 </LinearLayout>

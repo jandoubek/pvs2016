@@ -14,7 +14,7 @@ public class TokenCompletionView extends TokenCompleteTextView<String> {
 
 	public TokenCompletionView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setSplitChar(new char[] {',', ' ', ';'});
+		setSplitChar(new char[] { ',', ' ', ';' });
 		setThreshold(1);
 		allowDuplicates(false);
 	}

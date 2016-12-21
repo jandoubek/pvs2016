@@ -1,9 +1,5 @@
 package cz.cvut.fjfi.pvs.pvs2016.util;
 
-import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,6 +11,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 
 public class FileUtils {
