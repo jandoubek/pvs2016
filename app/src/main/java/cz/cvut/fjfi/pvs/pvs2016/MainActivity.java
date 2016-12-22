@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 	private static ListView list_View;
 	private static EditText editText;
 	private static ArrayAdapter<String> adapter;
-	ArrayList<String> nameArr = new ArrayList<>();
+	private static ArrayList<String> nameArr = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
