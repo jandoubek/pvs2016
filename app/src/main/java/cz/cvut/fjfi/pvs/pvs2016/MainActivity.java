@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 		list_View.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Object listItem = list_View.getItemAtPosition(position);
 				String value = (String) list_View.getItemAtPosition(position);
 				Toast.makeText(MainActivity.this, "Position: " + position + "Value: " + value, Toast.LENGTH_LONG).show();
 			}
