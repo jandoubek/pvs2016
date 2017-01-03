@@ -4,7 +4,7 @@ public interface IApplicationConstants {
 
 	String DIRECTORY_NAME = "LectureNotes";
 	String PICTURES_PATHS_INTENT_EXTRA = "currentSessionPicturePaths";
-	String POSTION_INTENT_EXTRA = "position";
+	String POSITION_INTENT_EXTRA = "position";
 	String GALLERY_PHOTO_LIST_EXTRA = "photoList";
 
 }

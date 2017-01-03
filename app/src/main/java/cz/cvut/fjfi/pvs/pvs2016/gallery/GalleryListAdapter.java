@@ -70,7 +70,7 @@ public class GalleryListAdapter extends RecyclerView.Adapter<GalleryItemViewHold
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(self, FullscreenItemActivity.class);
-			intent.putExtra(IApplicationConstants.POSTION_INTENT_EXTRA, postion);
+			intent.putExtra(IApplicationConstants.POSITION_INTENT_EXTRA, postion);
 
 			Bundle photoBundle = new Bundle();
 			photoBundle.putParcelableArrayList(IApplicationConstants.GALLERY_PHOTO_LIST_EXTRA, new ArrayList<Parcelable>(photoItems));

@@ -20,7 +20,7 @@ public class FullscreenItemActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fullscreeen_gallery);
-		int actualPosition = getIntent().getIntExtra(IApplicationConstants.POSTION_INTENT_EXTRA, 0);
+		int actualPosition = getIntent().getIntExtra(IApplicationConstants.POSITION_INTENT_EXTRA, 0);
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(new FullscreenItemAdapter(this, photoList));
 
