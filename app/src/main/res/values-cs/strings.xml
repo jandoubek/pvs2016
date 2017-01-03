@@ -12,4 +12,6 @@
 	<string name="complete_session_cancel_button_label">Zrušit</string>
 	<string name="seriesCompletionView_hint">Série</string>
 	<string name="finishReordering">Ukončit přeskupování</string>
+	<string name="share">Sdílet</string>
+	<string name="share_title">Sdílet PDF pomocí...</string>
 </resources>

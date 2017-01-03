@@ -1,9 +1,5 @@
 package cz.cvut.fjfi.pvs.pvs2016.util;
 
-import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,7 +11,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import android.net.Uri;
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
+import cz.cvut.fjfi.pvs.pvs2016.PhotosStaticCache;
+import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class FileUtils {
 
@@ -126,5 +128,19 @@ public class FileUtils {
 			}
 		}
 		return true;
+	}
+
+	public static Uri createPdfForSharingAndGetUri() {
+		File mediaStorageDir = getMediaStorageDir();
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		String fileName = "sharePDF_" + timeStamp + ".pdf";
+		File file = new File(mediaStorageDir, fileName);
+		List<Photo> photoList = PhotosStaticCache.getAll();
+		try {
+			PDFGenerator.generatePdf(photoList, file.getPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Uri.fromFile(file);
 	}
 }
