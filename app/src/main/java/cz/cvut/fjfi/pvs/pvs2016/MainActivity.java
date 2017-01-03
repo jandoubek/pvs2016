@@ -22,7 +22,7 @@ import android.widget.Toast;
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
 	private static ListView list_View;
 	private static EditText editText;
