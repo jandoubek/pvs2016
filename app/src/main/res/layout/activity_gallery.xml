@@ -8,7 +8,7 @@
 			  tools:context=".gallery.GalleryActivity">
 
 	<fragment
-			class="cz.cvut.fjfi.pvs.pvs2016.gallery.GaleryGridFragment"
+			class="cz.cvut.fjfi.pvs.pvs2016.gallery.GalleryGridFragment"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
 

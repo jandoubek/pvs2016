@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
-public class GaleryGridFragment extends Fragment {
-
-	public GaleryGridFragment() {
-	}
+public class GalleryGridFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

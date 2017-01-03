@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -18,16 +17,12 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class FullscreenItemAdapter extends PagerAdapter {
 
-	ArrayList<Photo> photos;
-
-	Context self;
-
-	Picasso picasso;
+	private ArrayList<Photo> photos;
+	private Context self;
 
 	FullscreenItemAdapter(Context activity, ArrayList<Photo> photoArrayList) {
 		this.self = activity;
 		this.photos = photoArrayList;
-		this.picasso = Picasso.with(activity);
 	}
 
 	@Override

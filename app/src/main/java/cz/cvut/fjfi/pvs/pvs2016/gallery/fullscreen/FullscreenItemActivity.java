@@ -12,19 +12,15 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 
 public class FullscreenItemActivity extends Activity {
 
-	private int actualPosition;
-
-	private ArrayList<Photo> photoList;
-
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 
 		Bundle photoBundle = getIntent().getExtras();
-		photoList = photoBundle.getParcelableArrayList(IApplicationConstants.GALLERY_PHOTO_LIST_EXTRA);
+		ArrayList<Photo> photoList = photoBundle.getParcelableArrayList(IApplicationConstants.GALLERY_PHOTO_LIST_EXTRA);
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fullscreeen_gallery);
-		actualPosition = getIntent().getIntExtra(IApplicationConstants.POSTION_INTENT_EXTRA, 0);
+		int actualPosition = getIntent().getIntExtra(IApplicationConstants.POSTION_INTENT_EXTRA, 0);
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(new FullscreenItemAdapter(this, photoList));
 
