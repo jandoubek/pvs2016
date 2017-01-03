@@ -36,6 +36,8 @@
 		<activity android:name=".camera.PreviewActivity"/>
 		<activity android:name=".camera.CompleteSessionActivity"/>
 		<activity android:name=".rearrange.RearrangementActivity"/>
+		<activity android:name=".gallery.GalleryActivity"/>
+		<activity android:name=".gallery.fullscreen.FullscreenItemActivity"/>
 	</application>
 
 </manifest>
