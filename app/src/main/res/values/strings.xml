@@ -17,4 +17,5 @@
 	<string name="share">Share</string>
 	<string name="share_title">Share PDF via...</string>
 	<string name="camera_permission_required_toast_text">Without permission for using camera is this application useless for you.</string>
+	<string name="delete">Delete</string>
 </resources>
