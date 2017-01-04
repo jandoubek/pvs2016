@@ -3,22 +3,28 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
 public class CameraActivity extends Activity {
 
+	private static final int CAMERA_PERMISSION_REQUEST_CODE = 5;
 	private final CameraActivity self = this;
 
 	private Camera camera;
@@ -58,10 +64,11 @@ public class CameraActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		camera = getCameraInstance();
-		cameraPreview = new CameraPreview(this, camera);
-		FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
-		preview.addView(cameraPreview);
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, CAMERA_PERMISSION_REQUEST_CODE);
+			return;
+		}
+		initializeCameraPreview();
 		initializeCaptureButton();
 	}
 
@@ -75,6 +82,22 @@ public class CameraActivity extends Activity {
 			camera.release();
 			camera = null;
 		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		if (requestCode == CAMERA_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			initializeCameraPreview();
+		} else {
+			Toast.makeText(this, R.string.camera_permission_required_toast_text, Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private void initializeCameraPreview() {
+		camera = getCameraInstance();
+		cameraPreview = new CameraPreview(this, camera);
+		FrameLayout preview = (FrameLayout) findViewById(R.id.cameraPreview);
+		preview.addView(cameraPreview);
 	}
 
 	private void initializeCaptureButton() {

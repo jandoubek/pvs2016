@@ -14,4 +14,5 @@
 	<string name="finishReordering">Ukončit přeskupování</string>
 	<string name="share">Sdílet</string>
 	<string name="share_title">Sdílet PDF pomocí...</string>
+	<string name="camera_permission_required_toast_text">Bez povolení pro používání kamery je tato aplikace nepoužitelná.</string>
 </resources>
