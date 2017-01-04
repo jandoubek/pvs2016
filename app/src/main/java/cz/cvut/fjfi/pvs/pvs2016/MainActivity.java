@@ -12,6 +12,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,11 +25,13 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
 	private ShareActionProvider mShareActionProvider;
 
 	private Context self;
+
+	private SeriesItemAdapter seriesItemAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.series_list);
-		SeriesItemAdapter seriesItemAdapter = new SeriesItemAdapter(new SeriesItemAdapter.Callback() {
+		seriesItemAdapter = new SeriesItemAdapter(new SeriesItemAdapter.Callback() {
 			@Override
 			public void onSeriesClicked(Series series) {
 				Intent galleryIntent = new Intent(self, GalleryActivity.class);
@@ -83,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
 		MenuItem shareItem = menu.findItem(R.id.toolbar_share);
 		mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+
+		final MenuItem searchItem = menu.findItem(R.id.action_search);
+		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		searchView.setOnQueryTextListener(this);
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -112,5 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
 	public void takePhoto(View view) {
 		startActivity(new Intent(this, CameraActivity.class));
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		return false;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		seriesItemAdapter.getFilter().filter(newText);
+		return true;
 	}
 }
