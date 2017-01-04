@@ -41,6 +41,8 @@ public class CompleteSessionActivity extends Activity {
 	public void saveSession(View v) {
 		TokenCompletionView tagsView = (TokenCompletionView) findViewById(R.id.tagsCompletionView);
 		TokenCompletionView seriesView = (TokenCompletionView) findViewById(R.id.seriesCompletionView);
+		// limit series to one
+		seriesView.setTokenLimit(1);
 		Set<String> tagsSet = new HashSet<>(tagsView.getObjects());
 		// TODO handle adding to more series
 		Series s = new Series(!seriesView.getObjects().isEmpty() ? seriesView.getObjects().get(0) : "");

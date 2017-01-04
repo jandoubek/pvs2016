@@ -7,21 +7,25 @@ import java.util.Random;
 
 import com.github.ivbaranov.mli.MaterialLetterIcon;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
 import cz.cvut.fjfi.pvs.pvs2016.model.Series;
+import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
 public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.SeriesViewHolder> {
 	private List<Series> mFiles;
 	private final Callback mCallback;
 	private int[] materialColors;
 	private static final Random RANDOM = new Random();
+	private Context context;
 
 	public void setFiles(List<Series> files) {
 		mFiles = Collections.unmodifiableList(new ArrayList<>(files));
@@ -39,7 +43,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 	@Override
 	public SeriesViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 		materialColors = viewGroup.getContext().getResources().getIntArray(R.array.material_colors);
-		Context context = viewGroup.getContext();
+		context = viewGroup.getContext();
 		View view = LayoutInflater.from(context).inflate(R.layout.item_series, viewGroup, false);
 		return new SeriesViewHolder(view);
 	}
@@ -64,7 +68,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 		private final TextView textView;
 		private final Button deleteButton;
 		private MaterialLetterIcon icon;
-		private Series mItem;
+		private Series series;
 
 		public SeriesViewHolder(final View itemView) {
 			super(itemView);
@@ -77,8 +81,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 			deleteButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					//					confirm dialog maybe and delete series
-					Toast.makeText(itemView.getContext(), "TODO deleting series", Toast.LENGTH_SHORT).show();
+					createDeleteConfirmationDialog().show();
 				}
 			});
 
@@ -86,12 +89,12 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 
 		@Override
 		public void onClick(View v) {
-			mCallback.onSeriesClicked(mItem);
+			mCallback.onSeriesClicked(series);
 		}
 
 		public void bind(Series item) {
-			mItem = item;
-			textView.setText(mItem.getName());
+			series = item;
+			textView.setText(series.getName());
 			setupIcon(item);
 		}
 
@@ -102,5 +105,31 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 			icon.setShapeColor(materialColors[RANDOM.nextInt(materialColors.length)]);
 			icon.setLetter(item.getName());
 		}
+
+		private AlertDialog createDeleteConfirmationDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			final List<Photo> photos = PhotosStaticCache.getSeriesPhotos(series);
+			// FIXME lokalizace
+			builder.setMessage("Do you really want to delete " + photos.size() + " photos?")
+					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+							for (Photo p : photos) {
+								FileUtils.deleteFile(p.getPath());
+								PhotosStaticCache.removePhoto(p);
+							}
+							//							mFiles.remove(series);
+							notifyDataSetChanged();
+						}
+					})
+					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+							dialogInterface.dismiss();
+						}
+					});
+			return builder.create();
+		}
 	}
+
 }

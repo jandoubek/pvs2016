@@ -100,8 +100,9 @@ public class FileUtils {
 	}
 
 	public static boolean deleteFile(String picturePath) {
-		File file = new File(picturePath);
-		return file.delete(); // TODO: smazat i metadata
+		File photoFile = new File(picturePath);
+		File metadataFile = new File(picturePath.replace(".jpg", ".json"));
+		return photoFile.delete() && metadataFile.delete();
 	}
 
 	public static boolean writeToFile(File file, byte[] data) {
