@@ -42,6 +42,15 @@ public class PhotosStaticCache {
 		return allTags;
 	}
 
+	public static List<String> getTagsForSeries(Series series) {
+		Set<String> allTags = new HashSet<>();
+		List<Photo> seriesPhotos = getSeriesPhotos(series);
+		for (Photo p : seriesPhotos) {
+			allTags.addAll(p.getTags());
+		}
+		return new ArrayList<>(allTags);
+	}
+
 	public static Set<String> getSeriesNames() {
 		Set<String> allSeries = new HashSet<>();
 		for (Photo p : cachedPhotos) {
