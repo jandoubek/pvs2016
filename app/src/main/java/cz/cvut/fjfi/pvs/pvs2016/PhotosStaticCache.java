@@ -52,6 +52,26 @@ public class PhotosStaticCache {
 		return allSeries;
 	}
 
+	public static List<Series> getSeries() {
+		Set<Series> allSeries = new HashSet<>();
+		for (Photo p : cachedPhotos) {
+			for (Series s : p.getSeries()) {
+				allSeries.add(s);
+			}
+		}
+		return new ArrayList<>(allSeries);
+	}
+
+	public static List<Photo> getSeriesPhotos(Series series) {
+		List<Photo> photoList = new ArrayList<>();
+		for (Photo p : cachedPhotos) {
+			if (p.getSeries().contains(series)) {
+				photoList.add(p);
+			}
+		}
+		return photoList;
+	}
+
 	public static int getLastIndexInSeries(String seriesName) {
 		List<Integer> indexes = new ArrayList<>();
 		Set<Series> series = getSeriesByName(seriesName);

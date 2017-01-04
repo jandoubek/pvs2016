@@ -52,4 +52,5 @@ dependencies {
 //	androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
 	compile 'com.android.support:recyclerview-v7:25.0.1'
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
+	compile 'com.github.ivbaranov:materiallettericon:0.2.2'
 }

@@ -6,4 +6,6 @@
 	<dimen name="img_margin">1dp</dimen>
 	<dimen name="gallery_margin">1dp</dimen>
 	<dimen name="TablePadding">5dp</dimen>
+	<dimen name="global_padding">16dp</dimen>
+	<dimen name="thumbnail_size">36dp</dimen>
 </resources>
