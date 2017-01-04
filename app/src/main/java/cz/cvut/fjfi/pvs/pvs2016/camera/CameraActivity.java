@@ -89,7 +89,7 @@ public class CameraActivity extends Activity {
 		if (requestCode == CAMERA_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			initializeCameraPreview();
 		} else {
-			Toast.makeText(this, "Without permission for using camera is this application useless for you!", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.camera_permission_required_toast_text, Toast.LENGTH_LONG).show();
 		}
 	}
 
