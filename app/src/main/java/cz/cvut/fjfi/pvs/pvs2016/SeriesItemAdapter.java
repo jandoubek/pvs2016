@@ -20,7 +20,6 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.SeriesViewHolder> {
 	private List<Series> mFiles;
 	private final Callback mCallback;
-	private Context self;
 	private int[] materialColors;
 	private static final Random RANDOM = new Random();
 
@@ -39,8 +38,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 
 	@Override
 	public SeriesViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		self = viewGroup.getContext();
-		materialColors = self.getResources().getIntArray(R.array.material_colors);
+		materialColors = viewGroup.getContext().getResources().getIntArray(R.array.material_colors);
 		Context context = viewGroup.getContext();
 		View view = LayoutInflater.from(context).inflate(R.layout.item_series, viewGroup, false);
 		return new SeriesViewHolder(view);
