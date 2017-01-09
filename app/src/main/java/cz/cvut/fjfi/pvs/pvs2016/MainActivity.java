@@ -1,5 +1,6 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 	private Context self;
 
 	private SeriesItemAdapter seriesItemAdapter;
+
+	static final int SHARE_REQUEST_CODE = 1;
+
+	private File shareFile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 			startActivity(intent);
 			return true;
 		case R.id.toolbar_share:
-			Uri uriToImage = FileUtils.createPdfForSharingAndGetUri();
+			shareFile = FileUtils.createPdfForSharingAndGetUri();
+			Uri uriToImage = Uri.fromFile(shareFile);
 			Intent shareIntent = new Intent();
 			shareIntent.setAction(Intent.ACTION_SEND);
 			shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 			if (mShareActionProvider != null) {
 				mShareActionProvider.setShareIntent(shareIntent);
 			}
-			startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_title)));
+			startActivityForResult(Intent.createChooser(shareIntent, getResources().getText(R.string.share_title)), SHARE_REQUEST_CODE);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -130,5 +136,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 	public boolean onQueryTextChange(String newText) {
 		seriesItemAdapter.getFilter().filter(newText);
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == SHARE_REQUEST_CODE) {
+			if (resultCode == RESULT_CANCELED) {
+				shareFile.delete();
+			}
+		}
 	}
 }
