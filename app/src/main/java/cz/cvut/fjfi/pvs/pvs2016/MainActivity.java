@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
 	private SeriesItemAdapter seriesItemAdapter;
 
-	static final int SHARE_REQUEST_CODE = 1;
+	private static final int SHARE_REQUEST_CODE = 1;
 
 	private File shareFile;
 
