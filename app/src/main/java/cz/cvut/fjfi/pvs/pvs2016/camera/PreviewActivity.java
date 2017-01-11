@@ -3,8 +3,6 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.bytedeco.javacpp.opencv_core;
-
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.squareup.picasso.Callback;
@@ -20,7 +18,6 @@ import android.widget.ImageView;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
-import cz.cvut.fjfi.pvs.pvs2016.util.ImageUtils;
 
 /**
  * When starting this activity non-empty list under key {@link IApplicationConstants#PICTURES_PATHS_INTENT_EXTRA}
@@ -41,13 +38,6 @@ public class PreviewActivity extends Activity {
 		//setUpPicasso();
 		//enhanceImage();
 		showPictureZoomable(getCurrentPicturePath());
-	}
-
-	private void enhanceImage() {
-		File imageFile = new File(getCurrentPicturePath());
-		opencv_core.Mat mat = ImageUtils.loadFileToMat(imageFile);
-		mat = ImageUtils.linearTransformation(mat, 1.5, 0);
-		ImageUtils.saveMatToFile(mat, imageFile);
 	}
 
 	private String getCurrentPicturePath() {
