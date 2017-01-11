@@ -22,12 +22,27 @@ public class PhotosStaticCache {
 		return cachedPhotos.addAll(photoList);
 	}
 
+	/**
+	 * @return {@code true} if cache has changed, {@code false} otherwise
+	 */
 	public static boolean removePhoto(Photo photo) {
-		return cachedPhotos.remove(photo);
+		int idx = findPhotoById(photo);
+		if (idx != -1) {
+			cachedPhotos.remove(idx);
+			return true;
+		}
+		return false;
 	}
 
+	/**
+	 * @return {@code true} if cache has changed, {@code false} otherwise
+	 */
 	public static boolean removePhotos(Collection<Photo> photoList) {
-		return cachedPhotos.removeAll(photoList);
+		boolean cacheHasChanged = false;
+		for (Photo photo : photoList) {
+			cacheHasChanged = removePhoto(photo) || cacheHasChanged;
+		}
+		return cacheHasChanged;
 	}
 
 	public static List<Photo> getAll() {
@@ -100,6 +115,18 @@ public class PhotosStaticCache {
 			}
 		}
 		return filteredSeries;
+	}
+
+	/**
+	 * @return index of passed {@code Photo} in cache or -1 if it is not present
+	 */
+	private static int findPhotoById(Photo photo) {
+		for (int i = 0; i < cachedPhotos.size(); i++) {
+			if (cachedPhotos.get(i).getId().equals(photo.getId())) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 }

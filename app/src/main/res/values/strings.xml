@@ -19,4 +19,8 @@
 	<string name="camera_permission_required_toast_text">Without permission for using camera is this application useless for you.</string>
 	<string name="delete">Delete</string>
 	<string name="action_search">Search</string>
+	<string name="delete_confirmation_ok_button_label">Ok</string>
+	<string name="delete_confirmation_cancel_button_label">Cancel</string>
+	<string name="delete_confirmation_dialog_text_beginning">"Do you really want to delete "</string>
+	<string name="delete_confirmation_dialog_text_end">" photos?"</string>
 </resources>

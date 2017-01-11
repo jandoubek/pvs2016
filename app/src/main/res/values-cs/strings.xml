@@ -17,4 +17,8 @@
 	<string name="camera_permission_required_toast_text">Bez povolení pro používání kamery je tato aplikace nepoužitelná.</string>
 	<string name="delete">Smazat</string>
 	<string name="action_search">Hledat</string>
+	<string name="delete_confirmation_ok_button_label">Ok</string>
+	<string name="delete_confirmation_cancel_button_label">Cancel</string>
+	<string name="delete_confirmation_dialog_text_beginning">Opravdu chcete smazat celkem</string>
+	<string name="delete_confirmation_dialog_text_end">fotek?</string>
 </resources>
