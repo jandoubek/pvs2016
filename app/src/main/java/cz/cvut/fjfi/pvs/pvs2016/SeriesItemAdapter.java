@@ -135,7 +135,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 			shareButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					//					// TODO: 1/11/2017 bind start of share intent to here
+					((MainActivity) context).shareSeries(series);
 				}
 			});
 

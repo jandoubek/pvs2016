@@ -133,12 +133,12 @@ public class FileUtils {
 		return true;
 	}
 
-	public static File createPdfForSharingAndGetUri() {
+	public static File createPdfForSharingAndGetUri(String seriesName) {
 		File mediaStorageDir = getMediaStorageDir();
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-		String fileName = "sharePDF_" + timeStamp + ".pdf";
+		String fileName =seriesName + "_" + timeStamp + ".pdf";
 		File file = new File(mediaStorageDir, fileName);
-		List<Photo> photoList = PhotosStaticCache.getAll();
+		List<Photo> photoList = PhotosStaticCache.getSeriesPhotos(seriesName);
 		try {
 			PDFGenerator.generatePdf(photoList, file.getPath());
 		} catch (IOException e) {

@@ -23,4 +23,5 @@
 	<string name="delete_confirmation_cancel_button_label">Cancel</string>
 	<string name="delete_confirmation_dialog_text_beginning">"Do you really want to delete "</string>
 	<string name="delete_confirmation_dialog_text_end">" photos?"</string>
+	<string name="share_progress_dialog">"Exporting, please wait."</string>
 </resources>
