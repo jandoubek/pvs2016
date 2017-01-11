@@ -8,6 +8,8 @@
 			  tools:context=".rearrange.RearrangementActivity">
 
 	<Button android:id="@+id/finishReordering"
+			style="?android:attr/borderlessButtonStyle"
+			android:drawableRight="@drawable/ic_exit_to_app_black_24dp"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:onClick="finishReordering"

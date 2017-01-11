@@ -23,10 +23,19 @@
 			android:layout_marginStart="@dimen/global_padding"
 			android:layout_gravity="center_vertical"
 			android:layout_width="180dp"
-			android:layout_height="wrap_content" android:layout_weight="0.50"/>
+			android:layout_height="wrap_content" android:layout_weight="1"/>
+
 	<Button
-			android:layout_width="wrap_content"
+			style="?android:attr/borderlessButtonStyle"
+			android:layout_width="@dimen/menu_icon_width"
 			android:layout_height="wrap_content"
-			android:text="@string/delete"
+			android:drawableRight="@drawable/ic_share_black_24dp"
+			android:id="@+id/series_share_button"/>
+	<Button
+			style="?android:attr/borderlessButtonStyle"
+			android:layout_width="@dimen/menu_icon_width"
+			android:layout_height="wrap_content"
+			android:drawableRight="@drawable/ic_delete_black_24dp"
 			android:id="@+id/series_delete_button"/>
+
 </LinearLayout>

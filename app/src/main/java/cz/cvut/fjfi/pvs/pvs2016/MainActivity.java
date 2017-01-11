@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 import cz.cvut.fjfi.pvs.pvs2016.gallery.GalleryActivity;
-import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.series_list);
 		seriesItemAdapter = new SeriesItemAdapter(new SeriesItemAdapter.Callback() {
 			@Override
-			public void onSeriesClicked(Series series) {
+			public void onSeriesClicked(String series) {
 				Intent galleryIntent = new Intent(self, GalleryActivity.class);
 				galleryIntent.putExtras(createBundleWithSeriesPhotoList(new ArrayList(PhotosStaticCache.getSeriesPhotos(series))));
 				startActivity(galleryIntent);
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 	}
 
 	private void loadSeriesToAdapter() {
-		seriesItemAdapter.setFiles(PhotosStaticCache.getSeries());
+		seriesItemAdapter.setFiles(PhotosStaticCache.getSeriesNames());
 	}
 
 }
