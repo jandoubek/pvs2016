@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -134,7 +133,7 @@ public class FileUtils {
 		return true;
 	}
 
-	public static Uri createPdfForSharingAndGetUri() {
+	public static File createPdfForSharingAndGetUri() {
 		File mediaStorageDir = getMediaStorageDir();
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 		String fileName = "sharePDF_" + timeStamp + ".pdf";
@@ -145,6 +144,6 @@ public class FileUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return Uri.fromFile(file);
+		return file;
 	}
 }
