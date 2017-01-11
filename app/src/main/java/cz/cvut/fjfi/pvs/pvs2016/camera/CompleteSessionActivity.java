@@ -75,14 +75,13 @@ public class CompleteSessionActivity extends Activity {
 	public void cancelSession(View view) {
 		for (String path : sessionPicturePaths) {
 			// TODO check if all files were deleted, do not ignore return value
-			FileUtils.deleteFile(path);
+			FileUtils.deleteFile(path, false);
 		}
 		finish();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		if (requestCode == RearrangementActivity.REARRANGEMENT_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
 				Bundle photoBundle = data.getExtras();

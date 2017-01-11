@@ -112,7 +112,7 @@ public class PreviewActivity extends Activity {
 
 	private void deleteImage() {
 		String currentPicturePath = getCurrentPicturePath();
-		boolean deleted = FileUtils.deleteFile(currentPicturePath);
+		boolean deleted = FileUtils.deleteFile(currentPicturePath, false);
 		sessionPicturePaths.remove(currentPicturePath);
 		if (!deleted) {
 			Log.e("PreviewActivity", "Could not delete file: " + currentPicturePath);

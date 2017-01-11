@@ -99,9 +99,12 @@ public class FileUtils {
 		return new File(metadataPath);
 	}
 
-	public static boolean deleteFile(String picturePath) {
-		File photoFile = new File(picturePath);
-		File metadataFile = new File(picturePath.replace(".jpg", ".json"));
+	public static boolean deleteFile(String photoPath, boolean deleteMetadata) {
+		File photoFile = new File(photoPath);
+		if (!deleteMetadata) {
+			return photoFile.delete();
+		}
+		File metadataFile = new File(photoPath.replace(".jpg", ".json"));
 		return photoFile.delete() && metadataFile.delete();
 	}
 

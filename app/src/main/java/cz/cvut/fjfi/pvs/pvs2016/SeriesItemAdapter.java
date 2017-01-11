@@ -161,7 +161,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
 							for (Photo p : photos) {
-								FileUtils.deleteFile(p.getPath());
+								FileUtils.deleteFile(p.getPath(), true);
 								PhotosStaticCache.removePhoto(p);
 							}
 							mFiles.remove(series);
