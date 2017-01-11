@@ -99,9 +99,13 @@ public class FileUtils {
 		return new File(metadataPath);
 	}
 
-	public static boolean deleteFile(String picturePath) {
-		File file = new File(picturePath);
-		return file.delete(); // TODO: smazat i metadata
+	public static boolean deleteFile(String photoPath, boolean deleteMetadata) {
+		File photoFile = new File(photoPath);
+		if (!deleteMetadata) {
+			return photoFile.delete();
+		}
+		File metadataFile = new File(photoPath.replace(".jpg", ".json"));
+		return photoFile.delete() && metadataFile.delete();
 	}
 
 	public static boolean writeToFile(File file, byte[] data) {

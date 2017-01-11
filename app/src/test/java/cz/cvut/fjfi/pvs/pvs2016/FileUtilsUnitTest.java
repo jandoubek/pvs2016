@@ -49,7 +49,7 @@ public class FileUtilsUnitTest {
 	@Test
 	public void mediaStorageDeleteTest() {
 		Assume.assumeTrue(FileUtils.writeToFile(testFile, testData));
-		boolean deleted = FileUtils.deleteFile(testFile.getAbsolutePath());
+		boolean deleted = FileUtils.deleteFile(testFile.getAbsolutePath(), false);
 		assertTrue(deleted);
 	}
 

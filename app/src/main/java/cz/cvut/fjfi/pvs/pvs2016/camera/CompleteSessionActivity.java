@@ -41,6 +41,8 @@ public class CompleteSessionActivity extends Activity {
 	public void saveSession(View v) {
 		TokenCompletionView tagsView = (TokenCompletionView) findViewById(R.id.tagsCompletionView);
 		TokenCompletionView seriesView = (TokenCompletionView) findViewById(R.id.seriesCompletionView);
+		// limit series to one
+		seriesView.setTokenLimit(1);
 		Set<String> tagsSet = new HashSet<>(tagsView.getObjects());
 		// TODO handle adding to more series
 		Series s = new Series(!seriesView.getObjects().isEmpty() ? seriesView.getObjects().get(0) : "");
@@ -60,7 +62,6 @@ public class CompleteSessionActivity extends Activity {
 			}
 		}
 		startActivityForResult(creteIntentWithArrayListBundle(photoList), RearrangementActivity.REARRANGEMENT_REQUEST_CODE);
-		Toast.makeText(this, "Successfully saved!", Toast.LENGTH_SHORT).show();
 	}
 
 	private Intent creteIntentWithArrayListBundle(ArrayList list) {
@@ -74,14 +75,13 @@ public class CompleteSessionActivity extends Activity {
 	public void cancelSession(View view) {
 		for (String path : sessionPicturePaths) {
 			// TODO check if all files were deleted, do not ignore return value
-			FileUtils.deleteFile(path);
+			FileUtils.deleteFile(path, false);
 		}
 		finish();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		if (requestCode == RearrangementActivity.REARRANGEMENT_REQUEST_CODE) {
 			if (resultCode == Activity.RESULT_OK) {
 				Bundle photoBundle = data.getExtras();
