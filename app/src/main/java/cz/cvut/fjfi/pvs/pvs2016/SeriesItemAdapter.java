@@ -63,18 +63,14 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 		List<String> results = new ArrayList<>();
 
 		for (String series : mFilesOriginal) {
-			if (series.toLowerCase().contains(constraint)) {
-				if (!results.contains(series)) {
-					results.add(series);
-					continue;
-				}
+			if (series.toLowerCase().contains(constraint) && !results.contains(series)) {
+				results.add(series);
+				continue;
 			}
 			List<String> tagsForSeries = PhotosStaticCache.getTagsForSeries(series);
 			for (String tag : tagsForSeries) {
-				if (tag.toLowerCase().contains(constraint)) {
-					if (!results.contains(series)) {
-						results.add(series);
-					}
+				if (tag.toLowerCase().contains(constraint) && !results.contains(series)) {
+					results.add(series);
 				}
 			}
 		}
