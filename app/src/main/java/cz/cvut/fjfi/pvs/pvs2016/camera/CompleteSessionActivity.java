@@ -35,7 +35,7 @@ public class CompleteSessionActivity extends Activity {
 		TokenCompletionView tagsView = (TokenCompletionView) findViewById(R.id.tagsCompletionView);
 		tagsView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(PhotosStaticCache.getTags())));
 		TokenCompletionView seriesView = (TokenCompletionView) findViewById(R.id.seriesCompletionView);
-		seriesView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>(PhotosStaticCache.getSeriesNames())));
+		seriesView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PhotosStaticCache.getSeriesNames()));
 	}
 
 	public void saveSession(View v) {

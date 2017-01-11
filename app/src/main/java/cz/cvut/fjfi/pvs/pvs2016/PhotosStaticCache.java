@@ -57,40 +57,33 @@ public class PhotosStaticCache {
 		return allTags;
 	}
 
-	public static List<String> getTagsForSeries(Series series) {
+	public static List<String> getTagsForSeries(String seriesName) {
 		Set<String> allTags = new HashSet<>();
-		List<Photo> seriesPhotos = getSeriesPhotos(series);
+		List<Photo> seriesPhotos = getSeriesPhotos(seriesName);
 		for (Photo p : seriesPhotos) {
 			allTags.addAll(p.getTags());
 		}
 		return new ArrayList<>(allTags);
 	}
 
-	public static Set<String> getSeriesNames() {
+	public static List<String> getSeriesNames() {
 		Set<String> allSeries = new HashSet<>();
 		for (Photo p : cachedPhotos) {
 			for (Series s : p.getSeries()) {
 				allSeries.add(s.getName());
 			}
 		}
-		return allSeries;
-	}
-
-	public static List<Series> getSeries() {
-		Set<Series> allSeries = new HashSet<>();
-		for (Photo p : cachedPhotos) {
-			for (Series s : p.getSeries()) {
-				allSeries.add(s);
-			}
-		}
 		return new ArrayList<>(allSeries);
 	}
 
-	public static List<Photo> getSeriesPhotos(Series series) {
+	public static List<Photo> getSeriesPhotos(String seriesName) {
 		List<Photo> photoList = new ArrayList<>();
 		for (Photo p : cachedPhotos) {
-			if (p.getSeries().contains(series)) {
-				photoList.add(p);
+			for (Series s : p.getSeries()) {
+				if (s.getName().equals(seriesName)) {
+					photoList.add(p);
+					break;
+				}
 			}
 		}
 		return photoList;

@@ -1,10 +1,8 @@
 package cz.cvut.fjfi.pvs.pvs2016;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import com.github.ivbaranov.mli.MaterialLetterIcon;
 
@@ -20,18 +18,17 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
-import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
 public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.SeriesViewHolder> implements Filterable {
-	private List<Series> mFiles;
-	private List<Series> mFilesOriginal;
+	private List<String> mFiles;
+	private List<String> mFilesOriginal;
 	private final Callback mCallback;
 	private int[] materialColors;
 	private static final Random RANDOM = new Random();
 	private Context context;
 
-	public void setFiles(List<Series> files) {
+	public void setFiles(List<String> files) {
 		mFiles = new ArrayList<>(files);
 		mFilesOriginal = new ArrayList<>(files);
 		notifyDataSetChanged();
@@ -42,13 +39,13 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 		return new Filter() {
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
-				mFiles = (List<Series>) results.values;
+				mFiles = (List<String>) results.values;
 				notifyDataSetChanged();
 			}
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
-				List<Series> filteredResults = null;
+				List<String> filteredResults = null;
 				if (constraint.length() == 0) {
 					filteredResults = mFilesOriginal;
 				} else {
@@ -62,25 +59,30 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 		};
 	}
 
-	private List<Series> getFilteredResults(String constraint) {
-		Set<Series> results = new HashSet<>();
+	private List<String> getFilteredResults(String constraint) {
+		List<String> results = new ArrayList<>();
 
-		for (Series series : mFilesOriginal) {
-			if (series.getName().toLowerCase().contains(constraint)) {
-				results.add(series);
+		for (String series : mFilesOriginal) {
+			if (series.toLowerCase().contains(constraint)) {
+				if (!results.contains(series)) {
+					results.add(series);
+					continue;
+				}
 			}
 			List<String> tagsForSeries = PhotosStaticCache.getTagsForSeries(series);
 			for (String tag : tagsForSeries) {
 				if (tag.toLowerCase().contains(constraint)) {
-					results.add(series);
+					if (!results.contains(series)) {
+						results.add(series);
+					}
 				}
 			}
 		}
-		return new ArrayList<>(results);
+		return results;
 	}
 
 	public interface Callback {
-		void onSeriesClicked(Series series);
+		void onSeriesClicked(String series);
 	}
 
 	public SeriesItemAdapter(Callback callback) {
@@ -103,7 +105,7 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 
 	@Override
 	public long getItemId(int position) {
-		return mFiles.get(position).getName().hashCode();
+		return mFiles.get(position).hashCode();
 	}
 
 	@Override
@@ -114,14 +116,16 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 	public class SeriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 		private final TextView textView;
 		private final Button deleteButton;
+		private final Button shareButton;
 		private MaterialLetterIcon icon;
-		private Series series;
+		private String series;
 
 		public SeriesViewHolder(final View itemView) {
 			super(itemView);
 			icon = (MaterialLetterIcon) itemView.findViewById(R.id.series_letter_image);
 			textView = (TextView) itemView.findViewById(R.id.series_text);
 			deleteButton = (Button) itemView.findViewById(R.id.series_delete_button);
+			shareButton = (Button) itemView.findViewById(R.id.series_share_button);
 			textView.setOnClickListener(this);
 			icon.setOnClickListener(this);
 
@@ -132,6 +136,13 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 				}
 			});
 
+			shareButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					//					// TODO: 1/11/2017 bind start of share intent to here
+				}
+			});
+
 		}
 
 		@Override
@@ -139,24 +150,25 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 			mCallback.onSeriesClicked(series);
 		}
 
-		public void bind(Series item) {
+		public void bind(String item) {
 			series = item;
-			textView.setText(series.getName());
+			textView.setText(series);
 			setupIcon(item);
 		}
 
-		private void setupIcon(Series item) {
+		private void setupIcon(String item) {
 			icon.setInitials(true);
 			icon.setInitialsNumber(1);
 			icon.setLetterSize(18);
 			icon.setShapeColor(materialColors[RANDOM.nextInt(materialColors.length)]);
-			icon.setLetter(item.getName());
+			icon.setLetter(item);
 		}
 
 		private AlertDialog createDeleteConfirmationDialog() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			final List<Photo> photos = PhotosStaticCache.getSeriesPhotos(series);
-			builder.setMessage(context.getString(R.string.delete_confirmation_dialog_text_beginning) + photos.size() + context.getString(R.string.delete_confirmation_dialog_text_end))
+			builder.setMessage(
+					context.getString(R.string.delete_confirmation_dialog_text_beginning) + photos.size() + context.getString(R.string.delete_confirmation_dialog_text_end))
 					.setPositiveButton(context.getString(R.string.delete_confirmation_ok_button_label), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
