@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 				startActivity(galleryIntent);
 			}
 		});
-		seriesItemAdapter.setFiles(PhotosStaticCache.getSeries());
+		loadSeriesToAdapter();
 
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(seriesItemAdapter);
@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		Bundle photoBundle = new Bundle();
 		photoBundle.putParcelableArrayList(IApplicationConstants.GALLERY_PHOTO_LIST_EXTRA, list);
 		return photoBundle;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadSeriesToAdapter();
 	}
 
 	@Override
@@ -131,4 +137,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		seriesItemAdapter.getFilter().filter(newText);
 		return true;
 	}
+
+	private void loadSeriesToAdapter() {
+		seriesItemAdapter.setFiles(PhotosStaticCache.getSeries());
+	}
+
 }

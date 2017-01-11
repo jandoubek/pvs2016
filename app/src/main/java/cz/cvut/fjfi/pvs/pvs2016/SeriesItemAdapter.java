@@ -156,20 +156,19 @@ public class SeriesItemAdapter extends RecyclerView.Adapter<SeriesItemAdapter.Se
 		private AlertDialog createDeleteConfirmationDialog() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			final List<Photo> photos = PhotosStaticCache.getSeriesPhotos(series);
-			// FIXME lokalizace
-			builder.setMessage("Do you really want to delete " + photos.size() + " photos?")
-					.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			builder.setMessage(context.getString(R.string.delete_confirmation_dialog_text_beginning) + photos.size() + context.getString(R.string.delete_confirmation_dialog_text_end))
+					.setPositiveButton(context.getString(R.string.delete_confirmation_ok_button_label), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
 							for (Photo p : photos) {
 								FileUtils.deleteFile(p.getPath());
 								PhotosStaticCache.removePhoto(p);
 							}
-							//							mFiles.remove(series);
+							mFiles.remove(series);
 							notifyDataSetChanged();
 						}
 					})
-					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					.setNegativeButton(context.getString(R.string.delete_confirmation_cancel_button_label), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int i) {
 							dialogInterface.dismiss();

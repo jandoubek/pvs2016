@@ -62,7 +62,6 @@ public class CompleteSessionActivity extends Activity {
 			}
 		}
 		startActivityForResult(creteIntentWithArrayListBundle(photoList), RearrangementActivity.REARRANGEMENT_REQUEST_CODE);
-		Toast.makeText(this, "Successfully saved!", Toast.LENGTH_SHORT).show();
 	}
 
 	private Intent creteIntentWithArrayListBundle(ArrayList list) {
