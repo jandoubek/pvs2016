@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,12 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
 import cz.cvut.fjfi.pvs.pvs2016.gallery.GalleryActivity;
-import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-
-	private ShareActionProvider mShareActionProvider;
 
 	private Context self;
 
@@ -94,9 +90,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_menu, menu);
 
-		MenuItem shareItem = menu.findItem(R.id.toolbar_share);
-		mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-
 		final MenuItem searchItem = menu.findItem(R.id.action_search);
 		final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 		searchView.setOnQueryTextListener(this);
@@ -110,18 +103,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		case R.id.toolbar_settings:
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
-			return true;
-		case R.id.toolbar_share:
-			shareFile = FileUtils.createPdfForSharingAndGetUri();
-			Uri uriToImage = Uri.fromFile(shareFile);
-			Intent shareIntent = new Intent();
-			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
-			shareIntent.setType("application/pdf");
-			if (mShareActionProvider != null) {
-				mShareActionProvider.setShareIntent(shareIntent);
-			}
-			startActivityForResult(Intent.createChooser(shareIntent, getResources().getText(R.string.share_title)), SHARE_REQUEST_CODE);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -154,6 +135,22 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
 	private void loadSeriesToAdapter() {
 		seriesItemAdapter.setFiles(PhotosStaticCache.getSeriesNames());
+	}
+
+	public void shareSeries(String seriesName) {
+		ShareAsyncTask shareAsyncTask = new ShareAsyncTask(MainActivity.this);
+		try {
+			// deliberately blocking the UI thread to show progressDialog
+			this.shareFile = shareAsyncTask.execute(seriesName).get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Uri uriToImage = Uri.fromFile(this.shareFile);
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
+		shareIntent.setType("application/pdf");
+		startActivityForResult(Intent.createChooser(shareIntent, getResources().getText(R.string.share_title)), SHARE_REQUEST_CODE);
 	}
 
 }
