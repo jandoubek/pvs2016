@@ -40,7 +40,7 @@ public class PhotosStaticCache {
 	public static boolean removePhotos(Collection<Photo> photoList) {
 		boolean cacheHasChanged = false;
 		for (Photo photo : photoList) {
-			cacheHasChanged = cacheHasChanged || removePhoto(photo);
+			cacheHasChanged = removePhoto(photo) || cacheHasChanged;
 		}
 		return cacheHasChanged;
 	}
