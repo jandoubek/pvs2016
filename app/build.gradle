@@ -11,7 +11,7 @@ android {
 		targetSdkVersion 25
 		versionCode 4
 		versionName "1.0"
-//		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
 
 	buildTypes {
@@ -46,4 +46,6 @@ dependencies {
 	compile 'com.android.support:recyclerview-v7:25.0.1'
 	compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.10'
 	compile 'com.github.ivbaranov:materiallettericon:0.2.2'
+	androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+	androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
