@@ -20,17 +20,13 @@ import cz.cvut.fjfi.pvs.pvs2016.model.Series;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
-public class JSONUtilsUnitTest {
+public class JSONUtilsUnitTest extends ADataWriteTest {
 	private File testJsonFile;
 	private Photo testPhoto;
 	private String testJsonString;
 
 	@Before
 	public void initializePhotoObjectAndJson() {
-		Assume.assumeTrue(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
-		File mediaStorageDir = FileUtils.getMediaStorageDir();
-		Assume.assumeTrue(mediaStorageDir != null);
-		// absolute path to image
 		String photoPath = mediaStorageDir.getAbsolutePath() + "/IMG_19920915_004842.jpg";
 		testJsonString = "{\"id\":\"IMG_19920915_004842\",\"path\":\"" + photoPath + "\",\"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"series\":"
 				+ "[{\"name\":\"series1\",\"index\":2},{\"name\":\"series2\",\"index\":42}],\"timestamp\":\"2016-12-11T09:42\"}";

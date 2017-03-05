@@ -18,7 +18,7 @@ import org.junit.rules.TemporaryFolder;
 import android.os.Environment;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 
-public class FileUtilsUnitTest {
+public class FileUtilsUnitTest extends ADataWriteTest {
 
 	private File testFile;
 	private final byte[] testData = { 0x1 };
@@ -28,16 +28,8 @@ public class FileUtilsUnitTest {
 
 	@Before
 	public void createMediaFile() {
-		Assume.assumeTrue(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
-
-		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-				Environment.DIRECTORY_PICTURES), IApplicationConstants.DIRECTORY_NAME);
 		this.testFile = new File(mediaStorageDir.getPath() + File.separator +
 				"IMG_test");
-		if (!mediaStorageDir.exists()) {
-			boolean dirsCreated = mediaStorageDir.mkdirs();
-			Assume.assumeTrue(dirsCreated);
-		}
 	}
 
 	@Test
