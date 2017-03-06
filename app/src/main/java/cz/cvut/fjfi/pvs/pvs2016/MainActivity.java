@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import cz.cvut.fjfi.pvs.pvs2016.camera.CameraActivity;
+import cz.cvut.fjfi.pvs.pvs2016.camera.CameraFragmentActivity;
 import cz.cvut.fjfi.pvs.pvs2016.gallery.GalleryActivity;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(self, CameraActivity.class));
+				startActivity(new Intent(self, CameraFragmentActivity.class));
 			}
 		});
 
@@ -107,10 +107,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	public void takePhoto(View view) {
-		startActivity(new Intent(this, CameraActivity.class));
 	}
 
 	@Override

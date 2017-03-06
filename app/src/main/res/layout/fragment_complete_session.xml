@@ -26,18 +26,18 @@
 			android:orientation="horizontal">
 
 		<Button
+				android:id="@+id/btn_settingTagsCancel"
 				android:text="@string/complete_session_cancel_button_label"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:onClick="cancelSession"/>
+				android:layout_weight="1"/>
 
 		<Button
+				android:id="@+id/btn_settingTagsComplete"
 				android:text="@string/complete_session_continue_button_label"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:onClick="saveSession"/>
+				android:layout_weight="1"/>
 
 	</LinearLayout>
 

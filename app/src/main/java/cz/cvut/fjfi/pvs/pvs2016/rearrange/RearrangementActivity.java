@@ -24,7 +24,7 @@ public class RearrangementActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getIntent().getExtras();
 		photoList = bundle.getParcelableArrayList(PHOTO_LIST_PARAMETER);
-		setContentView(R.layout.activity_rearrange);
+		setContentView(R.layout.fragment_reoder_photos);
 	}
 
 	protected ArrayList<Photo> getPhotoList() {
