@@ -13,7 +13,9 @@
 	<string name="complete_session_continue_button_label">Continue</string>
 	<string name="complete_session_cancel_button_label">Cancel</string>
 	<string name="seriesCompletionView_hint">Series</string>
-	<string name="finishReordering">Finish reordering</string>
+	<string name="btn_finishReordering">Finish</string>
+	<string name="btn_cancelReordering">Cancel</string>
+	<string name="btn_backReordering">Back</string>
 	<string name="share">Share</string>
 	<string name="share_title">Share PDF via...</string>
 	<string name="camera_permission_required_toast_text">Without permission for using camera is this application useless for you.</string>

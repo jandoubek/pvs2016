@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +15,6 @@ import android.widget.ArrayAdapter;
 import cz.cvut.fjfi.pvs.pvs2016.PhotosStaticCache;
 import cz.cvut.fjfi.pvs.pvs2016.R;
 import cz.cvut.fjfi.pvs.pvs2016.TokenCompletionView;
-import cz.cvut.fjfi.pvs.pvs2016.model.Photo;
-import cz.cvut.fjfi.pvs.pvs2016.rearrange.RearrangementActivity;
-import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
 public class CompleteSessionFragment extends Fragment {
 
@@ -71,28 +65,6 @@ public class CompleteSessionFragment extends Fragment {
 			mCallback = (SessionCompleteListener) getActivity();
 		} catch (ClassCastException e) {
 			throw new ClassCastException(getActivity().toString() + " must implement SessionCompleteListener!");
-		}
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == RearrangementActivity.REARRANGEMENT_REQUEST_CODE) {
-			if (resultCode == Activity.RESULT_OK) {
-				Bundle photoBundle = data.getExtras();
-				ArrayList<Photo> photoList = photoBundle.getParcelableArrayList(RearrangementActivity.PHOTO_LIST_PARAMETER);
-				// duplicate saving to cache, need discussion about this, TODO
-				for (Photo p : photoList) {
-					try {
-						// duplicate creation of meta-files, TODO
-						JSONUtils.createMetadataFile(p);
-					} catch (Exception e) {
-						Log.e(this.getClass().getSimpleName(), "Cannot create metadata file for picture with path: " + p.getPath());
-					}
-				}
-			}
-			if (resultCode == Activity.RESULT_CANCELED) {
-				//todo handle
-			}
 		}
 	}
 

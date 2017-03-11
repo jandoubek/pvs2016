@@ -3,7 +3,6 @@ package cz.cvut.fjfi.pvs.pvs2016.camera;
 import java.io.File;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -11,6 +10,7 @@ import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import cz.cvut.fjfi.pvs.pvs2016.IApplicationConstants;
 import cz.cvut.fjfi.pvs.pvs2016.PhotosStaticCache;
@@ -19,7 +19,7 @@ import cz.cvut.fjfi.pvs.pvs2016.rearrange.ReorderPhotosFragment;
 import cz.cvut.fjfi.pvs.pvs2016.util.FileUtils;
 import cz.cvut.fjfi.pvs.pvs2016.util.JSONUtils;
 
-public class CameraFragmentActivity extends Activity implements CameraFragment.PictureCapturingListener, PreviewFragment.PreviewFinishedListener,
+public class CameraFragmentActivity extends FragmentActivity implements CameraFragment.PictureCapturingListener, PreviewFragment.PreviewFinishedListener,
 		CompleteSessionFragment.SessionCompleteListener, ReorderPhotosFragment.ReorderingCompleteListener {
 
 	private ArrayList<String> sessionPicturePaths = new ArrayList<>();
@@ -34,7 +34,7 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 				return;
 			}
 			CameraFragment cameraFragment = new CameraFragment();
-			getFragmentManager().beginTransaction().add(R.id.camera_activity_container, cameraFragment).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.camera_activity_container, cameraFragment).commit();
 		}
 	}
 
@@ -45,9 +45,9 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 		bundle.putString(IApplicationConstants.PICTURE_PATH_ARGUMENT_KEY, picturePath);
 		PreviewFragment previewFragment = new PreviewFragment();
 		previewFragment.setArguments(bundle);
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.replace(R.id.camera_activity_container, previewFragment);
-		transaction.addToBackStack("preview");
+		transaction.addToBackStack(null);
 		transaction.commit();
 	}
 
@@ -58,17 +58,17 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 		if (!deleted) {
 			Log.e("CameraFragmentActivity", "Could not delete file: " + pictureToRemove);
 		}
-		showCameraFragment();
+		getSupportFragmentManager().popBackStack();
 	}
 
 	@Override
 	public void takeNextPicture() {
-		showCameraFragment();
+		getSupportFragmentManager().popBackStack();
 	}
 
 	@Override
 	public void setTagsToSession() {
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		Bundle bundle = new Bundle();
 		bundle.putStringArrayList(IApplicationConstants.SESSION_PICTURES_PATHS_ARGUMENT_KEY, sessionPicturePaths);
 		CompleteSessionFragment completeSessionFragment = new CompleteSessionFragment();
@@ -78,17 +78,9 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 		transaction.commit();
 	}
 
-	private void showCameraFragment() {
-		getFragmentManager().popBackStack();
-	}
-
 	@Override
 	public void onSettingTagsCancel() {
-		for (String path : sessionPicturePaths) {
-			// TODO check if all files were deleted, do not ignore return value
-			FileUtils.deleteFile(path, false);
-		}
-		showCameraFragment();
+		getSupportFragmentManager().popBackStack();
 	}
 
 	@Override
@@ -114,7 +106,7 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 		bundle.putParcelableArrayList(ReorderPhotosFragment.PHOTO_LIST_PARAMETER, photoList);
 		ReorderPhotosFragment reorderPhotosFragment = new ReorderPhotosFragment();
 		reorderPhotosFragment.setArguments(bundle);
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.replace(R.id.camera_activity_container, reorderPhotosFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
@@ -122,7 +114,13 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 
 	@Override
 	public void reorderingCancelled() {
-		getFragmentManager().popBackStack();
+		deletePictures(sessionPicturePaths);
+		finish();
+	}
+
+	@Override
+	public void reorderingBack() {
+		getSupportFragmentManager().popBackStack();
 	}
 
 	@Override
@@ -141,22 +139,12 @@ public class CameraFragmentActivity extends Activity implements CameraFragment.P
 
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
-		FragmentManager fragmentManager = getFragmentManager();
-		int stackEntryCount = fragmentManager.getBackStackEntryCount();
-		if (stackEntryCount > 0) {
-			FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(stackEntryCount - 1);
-			// FIXME same logic as in else clause
-			if (backStackEntry.getName().equals("preview")) {
-				deletePictures(sessionPicturePaths);
-				sessionPicturePaths.clear();
-			}
-			fragmentManager.popBackStack();
-		} else {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (fragmentManager.getBackStackEntryCount() <= 1) {
 			deletePictures(sessionPicturePaths);
 			sessionPicturePaths.clear();
-			finish();
 		}
+		super.onBackPressed();
 	}
 
 	private void deletePictures(List<String> photoPaths) {
