@@ -2,11 +2,10 @@ package cz.cvut.fjfi.pvs.pvs2016.model;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,30 +16,32 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 public class PhotoTest {
 
 	@Test
-	public void generateId(){
+	public void generateId() {
 
-		Set<String> ble = new HashSet<>();
+		List<String> ble = new ArrayList<>();
 		ble.add("ble");
 
-		Set<Series> bli = new HashSet<>();
+		List<Series> bli = new ArrayList<>();
 		bli.add(new Series("bli"));
 		Photo testPhoto = new Photo("IMG_19920915_004842", "bla", ble, bli, "2016-12-11T09:42");
 
 		assertThat(testPhoto.getId(), is("IMG_19920915_004842"));
 	}
 
-	@Test@Ignore
+	@Test
+	@Ignore
 	public void equalsVer() {
 		EqualsVerifier.forClass(Photo.class).verify();
 	}
 
-	@Test@Ignore
+	@Test
+	@Ignore
 	public void construct() {
 
-		Set<String> ble = new HashSet<>();
+		List<String> ble = new ArrayList<>();
 		ble.add("ble");
 
-		Set<Series> bli = new HashSet<>();
+		List<Series> bli = new ArrayList<>();
 		bli.add(new Series("bli"));
 		Photo testPhoto = new Photo("IMG_19920915_004842", "bla", ble, bli, "2016-12-11T09:42");
 		Parcel parcel = Parcel.obtain();
@@ -48,6 +49,7 @@ public class PhotoTest {
 		parcel.writeString("bla");
 		Photo testPhoto2 = new Photo(parcel);
 
-		assertThat(testPhoto, is(equalTo(testPhoto2)));
+		// FIXME compare fields of photos
+		//		assertThat(testPhoto, is(equalTo(testPhoto2)));
 	}
 }
