@@ -3,6 +3,7 @@ package cz.cvut.fjfi.pvs.pvs2016.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import android.os.Parcel;
@@ -12,11 +13,11 @@ public class Photo implements Parcelable {
 
 	private String id;
 	private String path;
-	private Set<String> tags;
-	private Set<Series> series;
+	private List<String> tags;
+	private List<Series> series;
 	private String timestamp;
 
-	public Photo(String id, String path, Set<String> tags, Set<Series> series, String timestamp) {
+	public Photo(String id, String path, List<String> tags, List<Series> series, String timestamp) {
 		this.id = id;
 		this.path = path;
 		this.tags = tags;
@@ -27,8 +28,8 @@ public class Photo implements Parcelable {
 	public Photo(Parcel in) {
 		this.id = in.readString();
 		this.path = in.readString();
-		this.tags = (Set<String>) in.readSerializable();
-		this.series = (Set<Series>) in.readSerializable();
+		this.tags = (List<String>) in.readSerializable();
+		this.series = (List<Series>) in.readSerializable();
 		this.timestamp = in.readString();
 	}
 
@@ -78,19 +79,19 @@ public class Photo implements Parcelable {
 		this.path = path;
 	}
 
-	public Set<String> getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(Set<String> tags) {
+	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
 
-	public Set<Series> getSeries() {
+	public List<Series> getSeries() {
 		return series;
 	}
 
-	public void setSeries(Set<Series> series) {
+	public void setSeries(List<Series> series) {
 		this.series = series;
 	}
 
@@ -108,31 +109,6 @@ public class Photo implements Parcelable {
 
 	public static String generateTimestamp() {
 		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").format(new Date());
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Photo photo = (Photo) o;
-
-		if (!id.equals(photo.id)) return false;
-		if (!path.equals(photo.path)) return false;
-		if (!tags.equals(photo.tags)) return false;
-		if (!series.equals(photo.series)) return false;
-		return timestamp.equals(photo.timestamp);
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result = id.hashCode();
-		result = 31 * result + path.hashCode();
-		result = 31 * result + tags.hashCode();
-		result = 31 * result + series.hashCode();
-		result = 31 * result + timestamp.hashCode();
-		return result;
 	}
 
 }

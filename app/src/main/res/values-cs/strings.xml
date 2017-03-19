@@ -11,7 +11,7 @@
 	<string name="complete_session_continue_button_label">Pokračovat</string>
 	<string name="complete_session_cancel_button_label">Zrušit</string>
 	<string name="seriesCompletionView_hint">Série</string>
-	<string name="finishReordering">Ukončit přeskupování</string>
+	<string name="btn_finishReordering">Hotovo</string>
 	<string name="share">Sdílet</string>
 	<string name="share_title">Sdílet PDF pomocí...</string>
 	<string name="camera_permission_required_toast_text">Bez povolení pro používání kamery je tato aplikace nepoužitelná.</string>
@@ -22,4 +22,6 @@
 	<string name="delete_confirmation_dialog_text_beginning">Opravdu chcete smazat celkem</string>
 	<string name="delete_confirmation_dialog_text_end">fotek?</string>
 	<string name="share_progress_dialog">"Exportuji, prosím počkejte."</string>
+	<string name="btn_cancelReordering">Ukončit</string>
+	<string name="btn_backReordering">Zpět</string>
 </resources>

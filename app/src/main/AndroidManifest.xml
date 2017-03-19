@@ -29,12 +29,7 @@
 		<activity
 				android:name=".SettingsActivity"
 				android:label="@string/toolbar_settings"/>
-		<activity
-				android:name=".camera.CameraActivity"
-				android:label="@string/app_name"
-				android:theme="@style/NoActionBar"/>
-		<activity android:name=".camera.PreviewActivity"/>
-		<activity android:name=".camera.CompleteSessionActivity"/>
+		<activity android:name=".camera.CameraFragmentActivity"/>
 		<activity android:name=".rearrange.RearrangementActivity"/>
 		<activity android:name=".gallery.GalleryActivity"/>
 		<activity android:name=".gallery.fullscreen.FullscreenItemActivity"/>

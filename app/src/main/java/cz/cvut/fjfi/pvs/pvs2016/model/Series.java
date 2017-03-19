@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Series implements Serializable {
 
+	private static final long serialVersionUID = 2402436870814270576L;
+
 	private String name;
 	private int index;
 
@@ -30,24 +32,6 @@ public class Series implements Serializable {
 
 	public void setIndex(int index) {
 		this.index = index;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Series series = (Series) o;
-
-		if (index != series.index) return false;
-		return name.equals(series.name);
-	}
-
-	@Override
-	public int hashCode() {
-		int result = name.hashCode();
-		result = 31 * result + index;
-		return result;
 	}
 
 }
