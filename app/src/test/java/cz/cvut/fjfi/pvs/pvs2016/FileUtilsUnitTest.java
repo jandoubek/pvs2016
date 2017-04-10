@@ -63,14 +63,6 @@ public class FileUtilsUnitTest {
 		assertFalse(FileUtils.writeToFile(temporaryFolder.newFolder(), new byte[]{0}));
 	}
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
-	@Test
-	public void writeToIOProhibitedFile() throws Exception{
-		File writeProtectedFile = temporaryFolder.newFile();
-		writeProtectedFile.setReadOnly();
-		assertFalse(FileUtils.writeToFile(writeProtectedFile, new byte[]{0}));
-	}
-
 	@After
 	public void cleanUp() {
 		testFile.delete();
