@@ -24,7 +24,7 @@ public class sampleUiTest {
 
 	@Test
 	public void turnOnCamera() {
-		Espresso.onView(withId(R.id.create_new)).perform(ViewActions.click());
+		Espresso.onView(withId(R.id.toolbar_settings)).perform(ViewActions.click());
 		Intents.intended(IntentMatchers.anyIntent());
 	}
 }
