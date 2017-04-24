@@ -8,7 +8,7 @@
       <runner id="RUNNER_2" name="Run emulator" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[#!/bin/bash
-emulator64-arm -avd emulator64 -no-skin -no-audio -no-window -verbose -sdcard myCard.img
+emulator64-arm -avd emulator64 -no-skin -no-audio -no-window -verbose -sdcard myCard.img &
 adb wait-for-device
 
 A=$(adb shell getprop sys.boot_completed | tr -d '\r')
