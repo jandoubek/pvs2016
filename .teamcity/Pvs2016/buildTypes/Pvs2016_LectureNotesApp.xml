@@ -6,9 +6,6 @@
     <options>
       <option name="artifactRules" value="+:**/*.apk" />
     </options>
-    <disabled-settings>
-      <setting-ref ref="RUNNER_2" />
-    </disabled-settings>
     <parameters />
     <build-runners>
       <runner id="RUNNER_2" name="Run emulator" type="simpleRunner">
