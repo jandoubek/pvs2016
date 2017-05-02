@@ -48,6 +48,16 @@ adb shell input keyevent 82]]></param>
         </parameters>
       </build-trigger>
     </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_1" type="xml-report-plugin">
+        <parameters>
+          <param name="xmlReportParsing.reportDirs"><![CDATA[build/reports/instrumentTests/**/*.xml
+build/instrumentTest-results/**/*.xml]]></param>
+          <param name="xmlReportParsing.reportType" value="junit" />
+          <param name="xmlReportParsing.verboseOutput" value="true" />
+        </parameters>
+      </extension>
+    </build-extensions>
     <cleanup />
   </settings>
 </build-type>
