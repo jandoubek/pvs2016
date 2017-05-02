@@ -37,6 +37,14 @@ adb shell input keyevent 82]]></param>
           <param name="ui.gradleRunner.gradle.wrapper.useWrapper" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_3" name="Terminate all emulators" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[#!/bin/bash
+adb kill-server]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="Pvs2016_HttpsGithubComJandoubekPvs2016refsHeadsMaster" />
