@@ -63,8 +63,8 @@ adb kill-server]]></param>
     <build-extensions>
       <extension id="BUILD_EXT_1" type="xml-report-plugin">
         <parameters>
-          <param name="xmlReportParsing.reportDirs"><![CDATA[build/reports/androidTests/connected/**/*.xml
-build/reports/tests/**/*.xml]]></param>
+          <param name="xmlReportParsing.reportDirs"><![CDATA[build/reports/androidTests/connected/*.xml
+build/reports/tests/*.xml]]></param>
           <param name="xmlReportParsing.reportType" value="junit" />
           <param name="xmlReportParsing.verboseOutput" value="true" />
         </parameters>
